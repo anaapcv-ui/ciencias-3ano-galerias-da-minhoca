@@ -1,0 +1,2455 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Galerias da Minhoca — Ciências 3º ano | O solo</title>
+<style>
+:root{
+  --terra:#6B4226; --terra-claro:#8C5A33; --terra-escuro:#4A2D1A;
+  --broto:#4CAF50; --broto-escuro:#2E7D32; --broto-claro:#A5D6A7;
+  --agua:#2F80C2; --agua-claro:#BBDEFB;
+  --sol:#F2B705; --sol-claro:#FFE9A8;
+  --creme:#FFF8EC; --papel:#FFFFFF;
+  --erro:#E2483D; --erro-claro:#FFD9D6;
+  --cinza:#9aa0a6; --cinza-claro:#E8E8E8;
+  --texto:#3A2A1C;
+  --sombra:0 4px 0 rgba(0,0,0,.10);
+}
+*{box-sizing:border-box;}
+body{
+  margin:0; padding:0;
+  font-family:"Verdana","Trebuchet MS",sans-serif;
+  background:var(--creme);
+  color:var(--texto);
+  font-size:17px; line-height:1.65;
+}
+.wrap{max-width:900px;margin:0 auto;padding:0 14px 60px;}
+
+/* ===== CABEÇALHO ===== */
+header.topo{
+  background:linear-gradient(180deg,#8C5A33 0%,#6B4226 60%,#4A2D1A 100%);
+  color:#FFF8EC; padding:22px 14px 16px; text-align:center;
+  border-bottom:6px solid var(--sol);
+}
+header.topo h1{margin:0;font-size:1.9rem;letter-spacing:.5px;}
+header.topo .sub{margin:6px 0 0;font-size:1rem;opacity:.95;}
+header.topo .prova{
+  display:inline-block;margin-top:10px;background:var(--sol);color:#4A2D1A;
+  font-weight:bold;padding:5px 14px;border-radius:20px;font-size:.92rem;
+}
+.minhoca-topo{font-size:2.4rem;display:block;line-height:1;margin-bottom:4px;}
+
+/* ===== ABAS ===== */
+nav.abas{
+  display:flex;flex-wrap:wrap;gap:8px;justify-content:center;
+  background:#5C3A20;padding:12px 10px;position:sticky;top:0;z-index:50;
+  box-shadow:0 3px 10px rgba(0,0,0,.25);
+}
+nav.abas button{
+  font-family:inherit;font-size:.92rem;font-weight:bold;cursor:pointer;
+  border:none;border-radius:12px;padding:10px 14px;
+  background:var(--sol-claro);color:#4A2D1A;
+  box-shadow:0 3px 0 #C99A00;transition:transform .12s;
+  display:flex;align-items:center;gap:6px;
+}
+nav.abas button:hover:not(.trancada){transform:translateY(-2px);}
+nav.abas button.ativa{background:var(--sol);box-shadow:0 3px 0 #A37C00;}
+nav.abas button.trancada{
+  background:#BFB4A8;color:#6b6257;box-shadow:0 3px 0 #9c9287;cursor:not-allowed;
+}
+nav.abas button.concluida::after{content:"✅";font-size:.85rem;}
+nav.abas button.novo{animation:pulsa 1.1s ease-in-out 4;}
+@keyframes pulsa{0%,100%{box-shadow:0 3px 0 #C99A00;}50%{box-shadow:0 0 0 7px rgba(242,183,5,.55);}}
+
+/* ===== PAINÉIS ===== */
+.painel{display:none;animation:entra .3s ease;}
+.painel.ativo{display:block;}
+@keyframes entra{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
+
+h2.tit{
+  font-size:1.5rem;margin:26px 0 6px;color:var(--terra);
+  border-bottom:4px dotted var(--broto-claro);padding-bottom:8px;
+}
+p.intro{background:#fff;border-left:7px solid var(--broto);border-radius:0 12px 12px 0;
+  padding:12px 16px;margin:12px 0 22px;box-shadow:var(--sombra);}
+
+/* ===== CADEADO ===== */
+.cadeado-aviso{
+  background:#F0E8DD;border:3px dashed #B9A890;border-radius:16px;
+  padding:26px 20px;text-align:center;margin:30px 0;
+}
+.cadeado-aviso .big{font-size:3rem;display:block;}
+.cadeado-aviso h3{margin:8px 0;color:#6b6257;}
+.cadeado-aviso p{margin:6px 0 0;font-size:1.02rem;}
+.cadeado-aviso .btn-voltar{
+  margin-top:16px;background:var(--broto);color:#fff;border:none;border-radius:12px;
+  padding:11px 20px;font-family:inherit;font-weight:bold;font-size:1rem;cursor:pointer;
+  box-shadow:0 3px 0 var(--broto-escuro);
+}
+
+/* ===== BARRA DE PROGRESSO ===== */
+.barra-box{background:#fff;border-radius:14px;padding:12px 16px;box-shadow:var(--sombra);margin:14px 0 22px;}
+.barra-fundo{background:var(--cinza-claro);border-radius:12px;height:20px;overflow:hidden;}
+.barra-fill{background:linear-gradient(90deg,var(--broto),var(--sol));height:100%;width:0;border-radius:12px;transition:width .4s;}
+.barra-txt{font-size:.9rem;font-weight:bold;margin-top:7px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;}
+
+/* ===== GALERIAS (leitura) ===== */
+.galeria{
+  background:var(--papel);border-radius:18px;margin:16px 0;overflow:hidden;
+  box-shadow:0 3px 10px rgba(107,66,38,.14);border:3px solid transparent;
+}
+.galeria.aberta{border-color:var(--sol);}
+.galeria.feita{border-color:var(--broto);}
+.galeria > .cabeca{
+  display:flex;align-items:center;gap:12px;cursor:pointer;
+  padding:14px 16px;background:var(--broto-claro);
+}
+.galeria.feita > .cabeca{background:#CDEBCF;}
+.galeria.bloqueada > .cabeca{background:#E0D7CB;cursor:not-allowed;}
+.cabeca .num{
+  background:var(--terra);color:#FFF8EC;border-radius:50%;
+  width:40px;height:40px;min-width:40px;display:flex;align-items:center;justify-content:center;
+  font-weight:bold;font-size:.95rem;
+}
+.galeria.feita .cabeca .num{background:var(--broto-escuro);}
+.cabeca .nome{font-weight:bold;font-size:1.06rem;flex:1;}
+.cabeca .pag{font-size:.78rem;opacity:.75;display:block;font-weight:normal;}
+.cabeca .seta{font-size:1.2rem;}
+.corpo{display:none;padding:4px 18px 20px;}
+.galeria.aberta .corpo{display:block;}
+
+.texto p{margin:12px 0;}
+.caixa-chave{
+  background:var(--sol-claro);border:3px solid var(--sol);border-radius:14px;
+  padding:12px 16px;margin:16px 0;
+}
+.caixa-chave h4{margin:0 0 6px;font-size:1rem;color:#7a5c00;}
+.caixa-chave ul{margin:6px 0 0;padding-left:20px;}
+.caixa-chave li{margin:5px 0;}
+b.destaque{background:var(--sol-claro);padding:1px 5px;border-radius:5px;}
+.curiosidade{
+  background:var(--agua-claro);border-left:7px solid var(--agua);border-radius:0 12px 12px 0;
+  padding:10px 14px;margin:14px 0;font-size:.97rem;
+}
+
+/* ===== PERGUNTAS ===== */
+.pergunta{background:#FBF6EE;border-radius:14px;padding:14px 16px;margin:14px 0;border:2px solid #EADFCF;}
+.pergunta .enunciado{font-weight:bold;margin:0 0 10px;}
+.alt{
+  display:block;width:100%;text-align:left;font-family:inherit;font-size:.99rem;
+  background:#fff;border:2px solid var(--cinza-claro);border-radius:11px;
+  padding:10px 13px;margin:7px 0;cursor:pointer;transition:.15s;
+}
+.alt:hover:not(:disabled){border-color:var(--sol);transform:translateX(3px);}
+.alt:disabled{cursor:default;}
+.alt.certa{background:#E4F7E5;border-color:var(--broto);font-weight:bold;}
+.alt.errada{background:var(--erro-claro);border-color:var(--erro);}
+.feedback{margin-top:9px;padding:10px 13px;border-radius:11px;font-size:.96rem;display:none;}
+.feedback.ok{background:#E4F7E5;border-left:6px solid var(--broto);display:block;}
+.feedback.nao{background:var(--erro-claro);border-left:6px solid var(--erro);display:block;}
+
+.btn-prox{
+  background:var(--broto);color:#fff;border:none;border-radius:12px;padding:12px 20px;
+  font-family:inherit;font-weight:bold;font-size:1rem;cursor:pointer;margin-top:12px;
+  box-shadow:0 3px 0 var(--broto-escuro);
+}
+.btn-prox:disabled{background:var(--cinza);box-shadow:0 3px 0 #7c8085;cursor:not-allowed;}
+.btn-sec{
+  background:var(--agua);color:#fff;border:none;border-radius:12px;padding:11px 18px;
+  font-family:inherit;font-weight:bold;cursor:pointer;box-shadow:0 3px 0 #1F5E94;margin:6px 4px 0 0;
+}
+.btn-sol{background:var(--sol);color:#4A2D1A;box-shadow:0 3px 0 #A37C00;}
+
+/* ===== MAPA MENTAL ===== */
+.mapa-area{background:#fff;border-radius:18px;padding:16px;box-shadow:var(--sombra);}
+.no-central{
+  background:var(--terra);color:#FFF8EC;border-radius:16px;padding:14px;text-align:center;
+  font-weight:bold;font-size:1.25rem;margin:0 auto 18px;max-width:330px;
+}
+.ramo{border-radius:14px;padding:12px 14px;margin:12px 0;border-left:9px solid;background:#FAFAF7;}
+.ramo h4{margin:0 0 8px;font-size:1.04rem;}
+.ramo .itens{display:flex;flex-wrap:wrap;gap:8px;align-items:center;}
+.ramo .fixo{background:#fff;border:2px dashed #ccc;border-radius:10px;padding:5px 10px;font-size:.93rem;}
+.lacuna{display:inline-flex;flex-direction:column;gap:5px;background:#fff;border:2px solid var(--cinza-claro);border-radius:11px;padding:7px 9px;}
+.lacuna .pergunta-mini{font-size:.82rem;opacity:.8;}
+.lacuna .ops{display:flex;gap:6px;flex-wrap:wrap;}
+.lacuna button{
+  font-family:inherit;font-size:.92rem;cursor:pointer;border:2px solid var(--cinza-claro);
+  background:#fff;border-radius:9px;padding:6px 11px;transition:.15s;
+}
+.lacuna button:hover:not(:disabled){border-color:var(--sol);}
+.lacuna.ok{background:#E4F7E5;border-color:var(--broto);}
+.lacuna.ok .preenchida{font-weight:bold;color:var(--broto-escuro);}
+.lacuna button.err{background:var(--erro-claro);border-color:var(--erro);animation:balanca .45s;}
+@keyframes balanca{0%,100%{transform:translateX(0);}20%{transform:translateX(-7px);}40%{transform:translateX(7px);}60%{transform:translateX(-5px);}80%{transform:translateX(5px);}}
+.contador-mapa{
+  background:var(--sol);color:#4A2D1A;font-weight:bold;border-radius:14px;
+  padding:10px 16px;text-align:center;margin:0 0 16px;font-size:1.06rem;
+}
+.mapa-completo{display:none;background:#E4F7E5;border:3px solid var(--broto);border-radius:16px;padding:18px;text-align:center;margin-top:18px;}
+.mapa-completo.ver{display:block;}
+.mapa-area.completo .ramo{background:#fff;box-shadow:0 3px 10px rgba(0,0,0,.09);}
+
+/* ===== VERDADEIRO OU FALSO ===== */
+.vf-card{background:#fff;border-radius:18px;padding:22px 18px;box-shadow:var(--sombra);text-align:center;}
+.vf-frase{font-size:1.16rem;font-weight:bold;margin:16px 0 22px;min-height:70px;display:flex;align-items:center;justify-content:center;}
+.vf-botoes{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+.vf-botoes button{
+  font-family:inherit;font-size:1.1rem;font-weight:bold;cursor:pointer;border:none;border-radius:14px;
+  padding:14px 30px;color:#fff;box-shadow:0 4px 0 rgba(0,0,0,.22);
+}
+.btn-v{background:var(--broto);} .btn-f{background:var(--erro);}
+.vf-expl{margin-top:16px;padding:14px;border-radius:12px;display:none;text-align:left;}
+.vf-expl.ver{display:block;}
+.estrelas{font-size:1.4rem;letter-spacing:2px;}
+.vf-final{display:none;text-align:center;background:#fff;border-radius:18px;padding:26px 18px;box-shadow:var(--sombra);}
+.vf-final.ver{display:block;}
+.trofeu{font-size:4rem;}
+
+/* ===== RESUMO ===== */
+.linha-tempo{position:relative;padding-left:34px;margin:18px 0;}
+.linha-tempo::before{content:"";position:absolute;left:11px;top:4px;bottom:4px;width:5px;background:var(--terra-claro);border-radius:3px;}
+.lt-item{position:relative;margin:0 0 16px;background:#fff;border-radius:13px;padding:11px 15px;box-shadow:var(--sombra);}
+.lt-item::before{content:"";position:absolute;left:-28px;top:16px;width:15px;height:15px;border-radius:50%;background:var(--sol);border:3px solid var(--terra);}
+.grade{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px;margin:16px 0;}
+.palavra{background:#fff;border-radius:13px;padding:12px 14px;box-shadow:var(--sombra);border-top:6px solid var(--broto);}
+.palavra b{color:var(--terra);display:block;margin-bottom:3px;}
+.postit{
+  background:var(--sol-claro);border:2px solid var(--sol);border-radius:4px;
+  padding:12px 15px;margin:12px 0;box-shadow:3px 3px 0 rgba(0,0,0,.09);
+  transform:rotate(-.5deg);
+}
+.alerta{background:var(--erro-claro);border-left:7px solid var(--erro);border-radius:0 12px 12px 0;padding:11px 15px;margin:12px 0;}
+.relampago{background:#fff;border-radius:13px;margin:10px 0;box-shadow:var(--sombra);overflow:hidden;}
+.relampago .q{padding:12px 15px;cursor:pointer;font-weight:bold;background:var(--agua-claro);}
+.relampago .r{display:none;padding:12px 15px;border-top:2px dashed var(--agua);}
+.relampago.ab .r{display:block;}
+
+/* ===== SIMULADO ===== */
+.sim-q{background:#fff;border-radius:15px;padding:15px 17px;margin:14px 0;box-shadow:var(--sombra);}
+.sim-q .num-q{background:var(--terra);color:#FFF8EC;border-radius:9px;padding:3px 10px;font-weight:bold;font-size:.86rem;}
+.sim-q .enun{font-weight:bold;margin:9px 0 11px;}
+.sim-alt{display:block;width:100%;text-align:left;font-family:inherit;font-size:.99rem;background:#FBF6EE;border:2px solid var(--cinza-claro);border-radius:11px;padding:10px 13px;margin:6px 0;cursor:pointer;}
+.sim-alt:hover:not(:disabled){border-color:var(--sol);}
+.sim-alt.marcada{background:var(--sol-claro);border-color:var(--sol);font-weight:bold;}
+.sim-alt.gab-certa{background:#E4F7E5;border-color:var(--broto);font-weight:bold;}
+.sim-alt.gab-errada{background:#F3F3F3;border-color:var(--cinza);opacity:.95;}
+.sim-coment{display:none;margin-top:10px;padding:12px 14px;background:#FFFDF5;border:2px dashed var(--sol);border-radius:12px;font-size:.95rem;}
+.sim-coment.ver{display:block;}
+.sim-coment .ce{color:var(--broto-escuro);font-weight:bold;}
+.sim-coment ul{margin:8px 0 0;padding-left:20px;}
+.resultado{display:none;background:#fff;border-radius:18px;padding:26px 18px;text-align:center;box-shadow:var(--sombra);margin:20px 0;}
+.resultado.ver{display:block;}
+.codigo{
+  background:var(--terra);color:var(--sol);font-family:"Courier New",monospace;font-weight:bold;
+  font-size:1.5rem;letter-spacing:3px;border-radius:12px;padding:12px 18px;display:inline-block;margin:12px 0;
+}
+
+/* ===== RODAPÉ / SALVAMENTO / RELATÓRIO ===== */
+.rodape-box{background:#fff;border-radius:18px;padding:16px;box-shadow:var(--sombra);margin:34px 0 12px;}
+.rodape-box h3{margin:0 0 10px;font-size:1.1rem;color:var(--terra);}
+.save-info{font-size:.86rem;opacity:.8;margin:6px 0 12px;}
+.botoes-save{display:flex;gap:9px;flex-wrap:wrap;}
+.botoes-save button{font-family:inherit;font-weight:bold;font-size:.93rem;cursor:pointer;border:none;border-radius:11px;padding:10px 15px;}
+.b-exp{background:var(--agua);color:#fff;box-shadow:0 3px 0 #1F5E94;}
+.b-imp{background:var(--broto);color:#fff;box-shadow:0 3px 0 var(--broto-escuro);}
+.b-zer{background:var(--erro);color:#fff;box-shadow:0 3px 0 #A8352C;}
+input.cod{font-family:"Courier New",monospace;font-size:1.05rem;padding:10px 12px;border:2px solid var(--cinza-claro);border-radius:11px;width:190px;text-transform:uppercase;}
+#relatorio{display:none;margin-top:16px;background:#FBF6EE;border-radius:14px;padding:15px;}
+#relatorio.ver{display:block;}
+#relatorio table{width:100%;border-collapse:collapse;font-size:.92rem;}
+#relatorio td,#relatorio th{border-bottom:1px solid #E2D8C8;padding:7px 5px;text-align:left;vertical-align:top;}
+.selo-lib{background:var(--sol);color:#4A2D1A;font-weight:bold;border-radius:20px;padding:5px 14px;display:inline-block;margin:8px 0;}
+
+/* ===== MODAL ===== */
+.modal-fundo{display:none;position:fixed;inset:0;background:rgba(40,25,12,.72);z-index:200;align-items:center;justify-content:center;padding:18px;}
+.modal-fundo.ver{display:flex;}
+.modal{background:#fff;border-radius:18px;padding:24px 20px;max-width:430px;text-align:center;box-shadow:0 10px 40px rgba(0,0,0,.4);}
+.modal h3{margin:8px 0 10px;color:var(--terra);}
+.modal button{background:var(--broto);color:#fff;border:none;border-radius:12px;padding:11px 20px;font-family:inherit;font-weight:bold;cursor:pointer;margin:9px 5px 0;box-shadow:0 3px 0 var(--broto-escuro);}
+.modal button.cinza{background:var(--cinza);box-shadow:0 3px 0 #70757a;}
+
+.pe-material{text-align:center;margin:26px 0 10px;}
+.dica-pais{font-size:.85rem;opacity:.8;margin-top:10px;line-height:1.5;}
+@media(max-width:560px){
+  body{font-size:16px;}
+  header.topo h1{font-size:1.45rem;}
+  nav.abas button{font-size:.84rem;padding:9px 11px;}
+  .grade{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<header class="topo">
+  <span class="minhoca-topo">🪱</span>
+  <h1>Galerias da Minhoca</h1>
+  <p class="sub">Ciências · 3º ano · Unidade 9 <b>Como é o solo?</b> e Unidade 10 <b>Usos e preservação do solo</b></p>
+  <span class="prova">📅 Prova: 11/11 — quarta-feira</span>
+</header>
+
+<nav class="abas" id="abas"></nav>
+
+<div class="wrap">
+
+  <div class="barra-box">
+    <div class="barra-fundo"><div class="barra-fill" id="barraGeral"></div></div>
+    <div class="barra-txt"><span id="txtGeral">A Mina está pronta para cavar!</span><span id="txtEtapa"></span></div>
+  </div>
+
+  <!-- ================= LEITURA GUIADA ================= -->
+  <section class="painel" id="p-leitura">
+    <h2 class="tit">📖 Leitura Guiada — As Galerias da Mina</h2>
+    <p class="intro">Oi! Eu sou a <b>Mina</b>, uma minhoca. Eu passo a vida cavando <b>galerias</b> (túneis) dentro do solo —
+    e é por causa delas que o ar e a água chegam até as raízes das plantas.<br><br>
+    Vem comigo! A cada galeria que eu abrir, você aprende um pedaço do solo. Leia o texto, responda as
+    <b>3 perguntas</b> e a próxima galeria se abre. 🪱</p>
+    <div id="galerias"></div>
+    <div id="fimLeitura"></div>
+  </section>
+
+  <!-- ================= MAPA MENTAL ================= -->
+  <section class="painel" id="p-mapa">
+    <h2 class="tit">🧠 Mapa das Galerias</h2>
+    <p class="intro">Agora vamos <b>organizar</b> tudo o que você leu num mapa só. Algumas palavras caíram do mapa!
+    Clique na palavra certa para <b>encaixar cada peça</b> no lugar. Se errar, tudo bem: é só tentar de novo. 🧩</p>
+    <div id="mapaWrap"></div>
+  </section>
+
+  <!-- ================= VERDADEIRO OU FALSO ================= -->
+  <section class="painel" id="p-vf">
+    <h2 class="tit">✅ Verdade na Terra?</h2>
+    <p class="intro">A Mina vai dizer <b>12 frases</b> sobre o solo. Algumas são verdade, outras não!
+    Clique em <b>VERDADEIRO</b> ou <b>FALSO</b> e descubra o porquê. 🪱</p>
+    <div id="vfWrap"></div>
+  </section>
+
+  <!-- ================= RESUMO ================= -->
+  <section class="painel" id="p-resumo">
+    <h2 class="tit">🗺️ Caderninho da Mina</h2>
+    <p class="intro">Este é o caderninho que a Mina usa para revisar na véspera da prova.
+    Leia até o fim e clique no botão lá embaixo! 📓</p>
+    <div id="resumoWrap"></div>
+  </section>
+
+  <!-- ================= SIMULADO ================= -->
+  <section class="painel" id="p-simulado">
+    <h2 class="tit">📝 A Grande Escavação</h2>
+    <p class="intro">Chegou a hora! São <b>25 perguntas</b> sobre tudo o que você estudou.
+    Responda com calma — dá para voltar e trocar a resposta antes de enviar. 💪</p>
+    <div id="simWrap"></div>
+  </section>
+
+  <!-- ================= RODAPÉ ================= -->
+  <div class="rodape-box">
+    <h3>💾 Seu progresso fica salvo</h3>
+    <p class="save-info" id="saveInfo">Ainda não salvei nada.</p>
+    <div class="botoes-save">
+      <button class="b-exp" id="btnExportar">📥 Exportar</button>
+      <button class="b-imp" id="btnImportar">📤 Importar</button>
+      <button class="b-zer" id="btnZerar">🗑️ Zerar tudo</button>
+    </div>
+    <input type="file" id="fileImp" accept=".json" style="display:none">
+  </div>
+
+  <div class="rodape-box">
+    <h3>📊 Relatório para os pais</h3>
+    <p class="save-info">Digite o código do Simulado (SIM-…) ou o código da família para abrir.</p>
+    <div class="botoes-save">
+      <input class="cod" id="inpCod" placeholder="SIM-00-XX" maxlength="12">
+      <button class="b-exp" id="btnRel">Abrir relatório</button>
+    </div>
+    <div id="relatorio"></div>
+    <p class="dica-pais">💡 <b>Dica para os pais:</b> os materiais abrem <b>um por vez</b>, na ordem — cada um destrava o
+    seguinte. O progresso fica salvo <b>neste aparelho e neste navegador</b>: se a criança estudar no tablet, o computador
+    não sabe. Use <b>📥 Exportar</b> num aparelho e <b>📤 Importar</b> no outro, ou use o código da família para liberar
+    tudo de uma vez.</p>
+  </div>
+
+</div>
+
+<div class="modal-fundo" id="modalFundo">
+  <div class="modal" id="modalCaixa"></div>
+</div>
+
+<script>
+/* =====================================================================
+   DADOS — tudo retirado de: Phases Ciências 3 – Livro 2,
+   Unidade 9 "Como é o solo?" e Unidade 10 "Usos e preservação do solo"
+   ===================================================================== */
+
+var SLUG = "ciencias3_galerias_minhoca";
+
+var LEITURA = [
+/* ---------------- GALERIA 1 ---------------- */
+{
+  n:"Galeria 1", nome:"O que é o solo?", pag:"páginas 56 e 57",
+  texto:`
+  <p>Quando a gente fala <b class="destaque">terra</b> no dia a dia, está falando do <b>solo</b>. O solo é aquilo que, em
+  linguagem popular, chamamos de terra.</p>
+  <p>E ele está em <b>todo lugar</b>: o solo recobre <b class="destaque">toda a superfície do planeta</b> — tanto nos
+  ambientes terrestres (onde a gente anda) quanto nos ambientes aquáticos (no fundo dos rios e do mar).</p>
+  <p>Mas atenção: <b>não existe só um tipo de solo</b>. Existem <b class="destaque">diferentes tipos de solo</b>, cada um
+  com características próprias. E é justamente por serem diferentes que eles podem ter <b>usos diferentes</b>.</p>
+  <div class="caixa-chave">
+    <h4>🪱 Para que serve o solo? (os 5 exemplos do livro)</h4>
+    <ul>
+      <li>🍅 Para o <b>plantio de vegetais comestíveis</b>, como o tomate.</li>
+      <li>🏠 Como <b>base da construção de moradias</b>: as pessoas constroem edificações acima da superfície dele.</li>
+      <li>🌴 O solo da <b>floresta tropical</b> favorece o crescimento de diversos tipos de vegetais.</li>
+      <li>🏖️ O solo da <b>praia é composto de areia</b> — e a areia tem vários usos, como na <b>construção civil</b>.</li>
+      <li>💧 Em certos lugares ele pode ser <b>escavado</b> para dar acesso a <b>fontes de água subterrânea</b>: são os
+      <b>poços</b>.</li>
+    </ul>
+  </div>
+  <div class="curiosidade">🪱 <b>A Mina avisa:</b> guarde esses cinco usos! O livro mostra eles logo no começo da
+  unidade, e eles voltam a aparecer na Unidade 10, quando falamos de como as pessoas usam o solo.</div>`,
+  qs:[
+    {q:"Na linguagem popular, o solo é chamado de quê?",
+     a:["Terra","Pedra","Areia","Lama"], c:0,
+     fb:["Isso! O livro começa dizendo exatamente isso: o solo é aquilo que, em linguagem popular, é chamado de terra.",
+         "Não. Pedras e rochas fazem parte da história do solo, mas o nome popular do solo é <b>terra</b>.",
+         "A areia é só <b>um dos grãos</b> que formam o solo. O nome popular do solo é <b>terra</b>.",
+         "Lama é terra molhada (principalmente a argilosa). O nome popular do solo é <b>terra</b>."]},
+    {q:"Onde o solo é encontrado no planeta?",
+     a:["Só nos lugares secos, onde as pessoas moram","Em toda a superfície do planeta, nos ambientes terrestres e também nos aquáticos","Só debaixo das florestas","Só nos lugares onde se planta alguma coisa"], c:1,
+     fb:["Não. O livro diz que ele recobre <b>toda</b> a superfície do planeta — inclusive debaixo da água.",
+         "Exato! Ele recobre toda a superfície do planeta: tanto nos ambientes terrestres quanto nos aquáticos.",
+         "A floresta tem solo, mas ele não está <b>só</b> ali: recobre toda a superfície do planeta.",
+         "O solo também existe onde ninguém planta nada — ele recobre toda a superfície do planeta."]},
+    {q:"Uma pessoa quer cavar um poço para chegar à água. Isso é possível porque…",
+     a:["todo solo é feito de água","em certos lugares o solo pode ser escavado para dar acesso a fontes de água subterrânea","a água só existe embaixo da areia da praia","o solo empurra a água para cima sozinho"], c:1,
+     fb:["Não. O solo tem água nos espaços entre os grãos, mas não é <b>feito</b> de água.",
+         "Isso mesmo! Esse é um dos cinco usos que o livro mostra: o poço é um ponto de acesso à água subterrânea.",
+         "Não só. O livro mostra o poço como exemplo em <b>certos lugares</b>, não apenas na praia.",
+         "Não existe isso. É a pessoa que escava até chegar à água subterrânea."]}
+  ]
+},
+/* ---------------- GALERIA 2 ---------------- */
+{
+  n:"Galeria 2", nome:"Do que o solo é feito: os grãos", pag:"página 61",
+  texto:`
+  <p>O solo de uma praia não é igual ao solo de uma floresta, que não é igual ao solo de uma montanha. Eles são
+  diferentes na <b>cor</b>, na <b>umidade</b>, no <b class="destaque">tamanho dos grãos</b>, na quantidade de fragmentos de
+  rocha e na presença de galhos e folhas em decomposição.</p>
+  <p>Mas há uma coisa que <b>todos</b> os solos têm em comum:</p>
+  <div class="caixa-chave">
+    <h4>🪱 Todo solo tem 4 coisas</h4>
+    <ul>
+      <li>Uma <b>parte mineral</b> (os grãos que vieram das rochas);</li>
+      <li>uma <b>parte orgânica</b> (restos de seres vivos);</li>
+      <li><b>espaços vazios preenchidos por ar</b>;</li>
+      <li><b>espaços vazios preenchidos por água</b>.</li>
+    </ul>
+  </div>
+  <p>Os grãos que formam a <b>parte mineral</b> são separados pelo <b class="destaque">tamanho</b>. São três:</p>
+  <div class="caixa-chave">
+    <h4>🧱 Os três grãos do solo (do menor para o maior)</h4>
+    <ul>
+      <li><b>ARGILA</b> — grãos <b>muito pequenos</b>, coloridos (marrons, avermelhados, amarelados ou acinzentados).
+      Seca, vira um <b>pó fininho</b>. Molhada, <b>forma barro</b> e pode até ser moldada.</li>
+      <li><b>SILTE</b> — grãos de tamanho <b>intermediário</b>: maiores que a argila e menores que a areia.</li>
+      <li><b>AREIA</b> — grãos <b>duros</b>, <b>maiores</b> que os da argila, <b>claros e com brilho</b>. Solos arenosos
+      existem principalmente nas <b>praias</b> e no <b>fundo dos rios</b>.</li>
+    </ul>
+  </div>
+  <p>Em geral os solos têm uma <b>mistura</b> dos três. Mas alguns têm mais areia — são os <b>solos arenosos</b> — e
+  outros têm mais argila — são os <b>solos argilosos</b>. Quando a quantidade dos três é mais ou menos igual, o livro
+  chama de <b>solo médio</b>.</p>
+  <div class="curiosidade">🪱 <b>Decore a ordem:</b> argila &lt; silte &lt; areia. A argila é a menorzinha de todas!</div>`,
+  qs:[
+    {q:"Coloque os grãos em ordem CRESCENTE de tamanho (do menor para o maior):",
+     a:["areia → silte → argila","argila → silte → areia","silte → argila → areia","argila → areia → silte"], c:1,
+     fb:["Essa é a ordem ao contrário! A <b>argila</b> é a menorzinha e a <b>areia</b> é a maior.",
+         "Perfeito! Argila (a menor) → silte (intermediário) → areia (a maior).",
+         "Quase. O silte não é o menor: ele fica <b>no meio</b>, entre a argila e a areia.",
+         "A areia não fica no meio — ela é a <b>maior</b> dos três. A ordem certa é argila → silte → areia."]},
+    {q:"A Mina pegou um punhado de solo molhado e conseguiu fazer uma bolinha moldada com ele. Qual grão está em maior quantidade nesse solo?",
+     a:["Argila","Areia","Silte","Nenhum, porque solo não se molda"], c:0,
+     fb:["Isso! O livro diz que a argila, quando molhada, <b>forma barro e pode até ser moldada</b>.",
+         "A areia tem grãos duros e soltos; ela não vira barro para moldar. Quem faz isso é a <b>argila</b>.",
+         "O silte fica no meio do caminho. Quem forma barro e pode ser moldada é a <b>argila</b>.",
+         "Dá sim! Quando tem bastante <b>argila</b>, o solo molhado forma barro e pode ser moldado."]},
+    {q:"Além da parte mineral e da parte orgânica, o que mais existe dentro de todo solo?",
+     a:["Só pedras grandes","Espaços vazios preenchidos por ar ou por água","Plástico e vidro","Nada mais: só mineral e orgânico"], c:1,
+     fb:["Fragmentos de rocha aparecem, mas a resposta que o livro destaca são os <b>espaços vazios</b>.",
+         "Isso mesmo! Todo solo tem parte mineral, parte orgânica e <b>espaços vazios preenchidos por ar ou por água</b>.",
+         "Plástico <b>não</b> faz parte da composição natural do solo — ele é lixo, poluição.",
+         "Falta uma coisa: os <b>espaços vazios</b>, que ficam cheios de ar ou de água."]}
+  ]
+},
+/* ---------------- GALERIA 3 ---------------- */
+{
+  n:"Galeria 3", nome:"Textura e cor do solo", pag:"páginas 62 e 63",
+  texto:`
+  <p>A <b class="destaque">textura</b> é uma característica que depende da <b>quantidade de grãos maiores e menores</b> que
+  o solo tem — ou seja, depende da <b>proporção entre areia, silte e argila</b>.</p>
+  <p>E como se descobre a textura? Pelo <b class="destaque">tato</b>! É só esfregar uma amostra de solo molhado entre os
+  dedos e sentir.</p>
+  <div class="caixa-chave">
+    <h4>✋ O quadro da página 62 — sensação ao tato</h4>
+    <ul>
+      <li>Solo <b>ARENOSO</b> → textura <b>ÁSPERA</b></li>
+      <li>Solo <b>SILTOSO</b> → textura <b>SEDOSA</b> (macia, como talco)</li>
+      <li>Solo <b>ARGILOSO</b> → textura <b>PEGAJOSA</b> (gruda nos dedos)</li>
+    </ul>
+  </div>
+  <p>Os solos <b>argilosos</b>, quando chove, <b>encharcam e formam lama</b>; e quando secam, aparecem
+  <b>rachaduras</b>.</p>
+  <h4 style="color:#6B4226;margin-top:22px;">🎨 E a cor?</h4>
+  <p>Os solos podem ser avermelhados, amarelados, acinzentados, marrons e brancos. A cor varia principalmente por causa
+  da <b>origem</b> do solo e de <b class="destaque">quais minerais ele foi formado</b>.</p>
+  <div class="caixa-chave">
+    <h4>🔴⚫ As duas cores que mais caem na prova</h4>
+    <ul>
+      <li>Solo <b>AVERMELHADO</b> → veio de rochas com <b>minério de ferro</b>. É um solo <b>rico em ferro</b>.</li>
+      <li>Solo <b>BEM ESCURO</b> → indica que há <b>muita matéria orgânica</b>. São solos <b>importantes para a
+      agricultura</b>, porque a terra escura é geralmente bastante <b>fértil</b>.</li>
+    </ul>
+  </div>
+  <div class="curiosidade">🪱 <b>Curiosidade do livro:</b> na Amazônia existe a chamada <b>Terra Preta de Índio</b>. Ela
+  tem origem pela <b>ação humana</b>: foi formada principalmente pelo acúmulo de resíduos orgânicos e pelo uso do
+  fogo.</div>`,
+  qs:[
+    {q:"Você esfrega um pouco de solo molhado nos dedos e ele GRUDA, fica pegajoso. Que solo é esse?",
+     a:["Arenoso","Siltoso","Argiloso","Nenhum: solo nunca gruda"], c:2,
+     fb:["O arenoso é <b>áspero</b>, raspa nos dedos. O pegajoso é o <b>argiloso</b>.",
+         "O siltoso é <b>sedoso</b>, macio como talco. O pegajoso é o <b>argiloso</b>.",
+         "Isso! No quadro da página 62: argiloso = textura <b>pegajosa</b>.",
+         "Gruda sim! Quando tem muita argila, o solo molhado fica <b>pegajoso</b>."]},
+    {q:"Um solo é bem escuro. O que isso indica?",
+     a:["Que ele tem muita matéria orgânica e é importante para a agricultura","Que ele tem muito ferro","Que ele é feito só de areia","Que ele está sujo de poluição"], c:0,
+     fb:["Isso! Solos bem escuros indicam muita matéria orgânica — a terra escura costuma ser bastante fértil.",
+         "O ferro deixa o solo <b>avermelhado</b>, não escuro. O escuro indica <b>matéria orgânica</b>.",
+         "A areia é clara e com brilho. Solo escuro = <b>matéria orgânica</b>.",
+         "Não! Cor escura aqui é coisa boa: significa <b>muita matéria orgânica</b>, solo fértil."]},
+    {q:"A textura do solo depende de quê?",
+     a:["Da cor dele","Da quantidade de água da chuva que caiu","Da proporção entre os grãos de areia, silte e argila","Do tipo de planta que está crescendo ali"], c:2,
+     fb:["A cor é outra característica, que depende dos minerais. A textura depende dos <b>grãos</b>.",
+         "A água ajuda a <b>sentir</b> a textura, mas quem determina a textura é a <b>proporção dos grãos</b>.",
+         "Exatamente! Textura = proporção entre os grãos maiores e menores (areia, silte e argila).",
+         "A planta não decide a textura. Quem decide é a <b>proporção dos grãos</b>."]}
+  ]
+},
+/* ---------------- GALERIA 4 ---------------- */
+{
+  n:"Galeria 4", nome:"A água dentro do solo", pag:"página 64",
+  texto:`
+  <p>Quando chove, a água que cai na superfície do solo <b class="destaque">infiltra</b> — ou seja, vai entrando e
+  descendo até as camadas mais profundas. Lá embaixo, ela forma os <b class="destaque">lençóis de água
+  subterrâneos</b>.</p>
+  <p>Outra parte da água infiltrada <b>ocupa os espaços entre as rochas e os grãos</b> do solo (lembra dos espaços vazios
+  da Galeria 2? É ali que ela fica).</p>
+  <div class="caixa-chave">
+    <h4>💧 O caminho da água (do céu de volta para o rio)</h4>
+    <ul>
+      <li>1. A <b>chuva</b> cai na superfície do solo.</li>
+      <li>2. A água <b>infiltra</b> até as camadas mais profundas.</li>
+      <li>3. Forma-se o <b>lençol de água subterrâneo</b>.</li>
+      <li>4. Essa água <b>pode voltar à superfície</b>: são as <b>NASCENTES</b>.</li>
+      <li>5. A água que brota das nascentes dá origem aos <b>riachos</b>.</li>
+      <li>6. Os riachos <b>se unem</b> e podem formar <b>grandes rios</b>.</li>
+    </ul>
+  </div>
+  <p>E tem uma informação muito importante: <b class="destaque">grande parte da água adequada para o consumo humano é
+  subterrânea</b>. Os grandes depósitos dessa água são chamados de <b>AQUÍFEROS</b>.</p>
+  <div class="curiosidade">🪱 <b>A Mina lembra:</b> a água que sai da torneira muitas vezes veio de baixo da terra.
+  Por isso cuidar do solo é também cuidar da água que a gente bebe!</div>`,
+  qs:[
+    {q:"O que acontece com a água da chuva que cai na superfície do solo?",
+     a:["Ela evapora toda na hora","Ela infiltra até as camadas mais profundas e forma os lençóis de água subterrâneos","Ela fica parada para sempre em cima do solo","Ela vira pedra"], c:1,
+     fb:["Um pouco evapora, mas o livro destaca que ela <b>infiltra</b> e forma os lençóis subterrâneos.",
+         "Isso mesmo! Ela infiltra e forma os <b>lençóis de água subterrâneos</b>.",
+         "Só fica parada em cima quando o solo está encharcado ou impermeabilizado. O normal é <b>infiltrar</b>.",
+         "Água não vira pedra. Ela <b>infiltra</b> e vai formar o lençol subterrâneo."]},
+    {q:"A água que infiltrou no solo e volta à superfície forma o quê?",
+     a:["As nascentes, que dão origem aos riachos","As nuvens","As dunas de areia","Os poços artificiais apenas"], c:0,
+     fb:["Isso! São as <b>nascentes</b>; a água que brota delas dá origem aos riachos, que se unem e formam grandes rios.",
+         "Nuvens se formam no céu, com a evaporação. A água que volta do solo forma as <b>nascentes</b>.",
+         "Dunas são montes de areia feitos pelo vento. A água que volta à superfície forma as <b>nascentes</b>.",
+         "O poço é cavado pela pessoa. Quando a água volta sozinha, chamamos de <b>nascente</b>."]},
+    {q:"Como se chamam os grandes depósitos de água subterrânea?",
+     a:["Riachos","Lagoas","Aquíferos","Serapilheiras"], c:2,
+     fb:["Riachos correm na superfície. Os grandes depósitos subterrâneos são os <b>aquíferos</b>.",
+         "Lagoas ficam na superfície. Os grandes depósitos subterrâneos são os <b>aquíferos</b>.",
+         "Isso! E grande parte da água adequada para o consumo humano vem deles.",
+         "Serapilheira é a camada de folhas em cima do solo (você vai ver na Galeria 11!). Aqui a resposta é <b>aquíferos</b>."]}
+  ]
+},
+/* ---------------- GALERIA 5 ---------------- */
+{
+  n:"Galeria 5", nome:"Permeabilidade e porosidade", pag:"páginas 65 a 68",
+  texto:`
+  <p>Nem todo solo deixa a água passar do mesmo jeito. Alguns são mais <b>permeáveis</b>, outros são menos.</p>
+  <div class="caixa-chave">
+    <h4>💧 As duas palavras-chave desta galeria</h4>
+    <ul>
+      <li><b>PERMEABILIDADE</b> — é a característica que o solo tem de <b>possibilitar que a água circule (infiltre)
+      pelos espaços entre os grãos</b>.</li>
+      <li><b>POROSIDADE</b> — esses espaços entre os grãos também são chamados de <b>POROS</b>. E a regra é simples:
+      <b class="destaque">quanto mais espaços há no solo, mais poroso ele é</b>.</li>
+    </ul>
+  </div>
+  <p>Na atividade prática do livro, três garrafas foram enchidas com solos diferentes e a turma despejou um copo de água
+  em cada uma, cronometrando. O resultado é fácil de entender:</p>
+  <div class="caixa-chave">
+    <h4>🏺 O que a experiência mostrou</h4>
+    <ul>
+      <li>No solo <b>ARENOSO</b> (grãos grandes, muitos espaços entre eles) a água passa <b>rápido e em maior
+      quantidade</b>: é <b>mais permeável</b>.</li>
+      <li>No solo <b>ARGILOSO</b> (grãos muito pequenos, bem juntinhos) a água passa <b>devagar</b>: é <b>menos
+      permeável</b>. Por isso ele <b>encharca mais facilmente</b> e forma poças de água.</li>
+    </ul>
+  </div>
+  <div class="curiosidade">🪱 <b>Ligue as galerias!</b> O <b>tamanho dos grãos</b> (Galeria 2) é que explica tudo isto:
+  grão grande deixa espaço grande; grão pequenininho deixa quase espaço nenhum.</div>`,
+  qs:[
+    {q:"O que é a permeabilidade do solo?",
+     a:["A cor que o solo tem quando seca","A característica de possibilitar que a água circule pelos espaços entre os grãos","A quantidade de minhocas que vivem nele","O peso de um punhado de terra"], c:1,
+     fb:["Cor é outra característica. Permeabilidade é sobre a <b>água circular</b> pelo solo.",
+         "Isso! É a característica de deixar a água infiltrar pelos espaços entre os grãos.",
+         "As minhocas ajudam a água a entrar, mas permeabilidade é a <b>característica de deixar a água circular</b>.",
+         "Peso não tem nada a ver. Permeabilidade é a <b>água circulando entre os grãos</b>."]},
+    {q:"Em qual dos dois solos a água passou em MAIOR quantidade na experiência das garrafas?",
+     a:["No solo argiloso, porque ele gruda a água","No solo arenoso, porque tem grãos maiores e mais espaços entre eles","Nos dois igualmente","Em nenhum: a água nunca passa pelo solo"], c:1,
+     fb:["Ao contrário: o argiloso tem grãos pequenininhos e bem juntos, por isso a água passa <b>devagar</b>.",
+         "Isso mesmo! Grãos maiores deixam espaços maiores — o arenoso é o <b>mais permeável</b>.",
+         "Não. Deu diferença justamente por causa do <b>tamanho dos grãos</b>.",
+         "Passa sim — é assim que se formam os lençóis de água subterrâneos!"]},
+    {q:"Depois da chuva, qual solo encharca mais facilmente e forma poças?",
+     a:["O arenoso","O argiloso","Os dois nunca encharcam","Só o solo da floresta"], c:1,
+     fb:["No arenoso a água desce rápido, por isso ele quase não forma poça. Quem encharca é o <b>argiloso</b>.",
+         "Isso! Como ele é pouco permeável, a água não desce rápido e fica acumulada na superfície.",
+         "Encharcam sim — o <b>argiloso</b> encharca com facilidade.",
+         "Não depende da floresta e sim do <b>tipo de grão</b>: o argiloso é que encharca."]}
+  ]
+},
+/* ---------------- GALERIA 6 ---------------- */
+{
+  n:"Galeria 6", nome:"Quem mora no solo", pag:"páginas 69 e 70",
+  texto:`
+  <p>Agora chegamos na minha parte favorita 🪱. Os solos abrigam uma <b class="destaque">grande diversidade de seres
+  vivos</b>: vermes, larvas de insetos, minhocas, formigas, caramujos — e seres microscópicos.</p>
+  <div class="caixa-chave">
+    <h4>🔬 Os seres microscópicos</h4>
+    <ul>
+      <li>São as <b>bactérias</b> e os <b>fungos</b>. Eles <b>ajudam na formação do solo</b> e influenciam as
+      características dele.</li>
+      <li>A maioria <b>só pode ser observada com a ajuda de microscópios</b>.</li>
+      <li>Eles se alimentam de <b>restos de outros seres vivos</b> (animais mortos, folhas e galhos de plantas). Por isso
+      <b class="destaque">auxiliam na decomposição da matéria orgânica</b> presente no solo.</li>
+    </ul>
+  </div>
+  <div class="caixa-chave">
+    <h4>🐛 Os animais do solo</h4>
+    <ul>
+      <li>Minhocas, insetos (formigas, cupins, grilos, gafanhotos e besouros), centopeias, piolhos-de-cobra, caracóis e
+      tatuzinhos-de-jardim.</li>
+      <li>Eles se alimentam de microrganismos, pequenos animais e restos de plantas em decomposição.</li>
+      <li>Auxiliam no <b>REVOLVIMENTO do solo</b>, ao misturar a matéria orgânica com os grãos minerais.
+      (<b>Revolvimento</b> = ação de misturar a terra.)</li>
+      <li>E, <b class="destaque">ao cavar galerias, permitem a entrada de ar e água até as raízes das plantas</b>.</li>
+    </ul>
+  </div>
+  <p>Dois bichinhos que o livro mostra com mais detalhe:</p>
+  <div class="curiosidade">🪵 <b>Tatuzinho-de-jardim:</b> ao se alimentar, ele <b>reduz o tamanho das folhas secas</b> e
+  facilita a ação de fungos e bactérias — assim a decomposição fica <b>mais rápida</b>.</div>
+  <div class="curiosidade">🪱 <b>Minhoca (eu!):</b> além de reduzir o tamanho das folhas secas, eu <b>cavo túneis que
+  permitem a entrada de ar e de água no solo</b>. É por isso que este kit se chama "Galerias da Minhoca"!</div>`,
+  qs:[
+    {q:"Qual é a importância das bactérias e dos fungos para o solo?",
+     a:["Eles deixam o solo mais duro","Eles auxiliam na decomposição da matéria orgânica","Eles comem as raízes das plantas","Eles fazem buracos grandes no solo"], c:1,
+     fb:["Ao contrário: eles ajudam a formar o húmus, que deixa a terra fofa.",
+         "Isso! Eles se alimentam de restos de seres vivos e auxiliam na <b>decomposição da matéria orgânica</b>.",
+         "Não. Eles se alimentam de <b>restos</b> de seres vivos, não das raízes vivas.",
+         "Quem cava galerias são as minhocas e as formigas. Bactérias e fungos são microscópicos e <b>decompõem</b>."]},
+    {q:"Como as minhocas e as formigas, que cavam galerias, influenciam o solo?",
+     a:["Permitem a entrada de ar e de água até as raízes das plantas","Deixam o solo impermeável","Tiram toda a matéria orgânica do solo","Fazem o solo ficar vermelho"], c:0,
+     fb:["Isso! Ao cavar galerias, elas abrem caminho para o ar e a água chegarem às raízes.",
+         "É o contrário! As galerias ajudam a água a <b>entrar</b>.",
+         "Elas <b>misturam</b> a matéria orgânica com os grãos minerais (revolvimento) — não tiram.",
+         "A cor vermelha vem do <b>ferro</b>. As galerias servem para a entrada de ar e água."]},
+    {q:"O que significa a palavra REVOLVIMENTO, que aparece no livro?",
+     a:["Deixar o solo secar","Ação de misturar a terra","Tirar a água do solo","Plantar uma semente"], c:1,
+     fb:["Não. O livro define revolvimento como <b>ação de misturar a terra</b>.",
+         "Exatamente! É a ação de misturar a terra — foi assim que o livro explicou.",
+         "Não. Revolvimento é <b>misturar a terra</b>.",
+         "Plantar é outra coisa. Revolvimento é <b>misturar a terra</b>."]}
+  ]
+},
+/* ---------------- GALERIA 7 ---------------- */
+{
+  n:"Galeria 7", nome:"Húmus, decomposição e solo fértil", pag:"páginas 70 e 71",
+  texto:`
+  <p>A <b>parte orgânica</b> do solo é composta de <b class="destaque">restos de seres vivos que morreram</b>: partes de
+  plantas, restos de animais e fezes.</p>
+  <p>Quando esse material se decompõe, forma-se o <b class="destaque">HÚMUS</b>. Ele se mistura com a terra e deixa ela
+  <b>escura, fofa, úmida e pegajosa</b>. E o mais importante: o húmus é <b>rico em nutrientes</b> importantes para que as
+  plantas cresçam e se desenvolvam.</p>
+  <div class="caixa-chave">
+    <h4>♻️ Como funciona a DECOMPOSIÇÃO</h4>
+    <ul>
+      <li>1. Bactérias e fungos usam os <b>restos de seres vivos</b> para se nutrir.</li>
+      <li>2. Com isso, eles <b>liberam para o solo substâncias minerais</b> importantes para os vegetais.</li>
+      <li>3. Essas substâncias <b>se misturam à água do solo</b>.</li>
+      <li>4. As plantas as <b>absorvem pelas raízes</b>.</li>
+    </ul>
+  </div>
+  <h4 style="color:#6B4226;margin-top:22px;">🌱 O que é um solo fértil?</h4>
+  <p>Para ser <b>fértil</b>, um solo precisa fornecer às plantas <b class="destaque">não apenas nutrientes, mas também ar
+  e água</b>.</p>
+  <p>E isso só acontece quando ele está <b class="destaque">ESTRUTURADO</b>, ou seja, quando <b>NÃO está
+  compactado</b>.</p>
+  <div class="caixa-chave">
+    <h4>🧱 Como o solo fica estruturado</h4>
+    <ul>
+      <li>Os grãos de areia, silte e argila são <b>ligados entre si</b> por alguma substância <b>aglutinadora</b>.</li>
+      <li>Eles formam pequenos aglomerados chamados <b>AGREGADOS</b>.</li>
+      <li>Os agregados tanto <b>armazenam água</b> como <b>permitem a circulação do ar</b>.</li>
+      <li>O <b>HÚMUS</b> é uma dessas substâncias aglutinadoras — e ainda contribui para o <b>armazenamento de
+      nutrientes</b> no solo.</li>
+    </ul>
+  </div>
+  <div class="curiosidade">🪱 <b>Guarde esta frase:</b> solo <b>compactado</b> (amassado, apertado) = solo <b>sem
+  estrutura</b> = solo que não é fértil. Isso vai voltar na Unidade 10!</div>`,
+  qs:[
+    {q:"O que é o húmus?",
+     a:["Um tipo de grão mineral, como a areia","O material que se forma quando os restos de seres vivos se decompõem","Uma pedra escura do fundo do solo","A água que fica entre os grãos"], c:1,
+     fb:["Não. Areia, silte e argila são grãos <b>minerais</b>. O húmus vem da <b>parte orgânica</b>.",
+         "Isso! E ele deixa a terra escura, fofa, úmida e pegajosa, além de ser rico em nutrientes.",
+         "Não é pedra. O húmus vem da <b>decomposição de restos de seres vivos</b>.",
+         "A água ocupa os espaços vazios. O húmus vem da <b>decomposição da matéria orgânica</b>."]},
+    {q:"Para um solo ser FÉRTIL, ele precisa fornecer às plantas:",
+     a:["apenas nutrientes","apenas água","nutrientes, ar e água","apenas ar"], c:2,
+     fb:["Falta coisa! O livro diz: não apenas nutrientes, mas também <b>ar e água</b>.",
+         "Falta coisa! O livro diz: <b>nutrientes, ar e água</b>.",
+         "Exatamente como está no livro: não apenas nutrientes, mas também ar e água.",
+         "Falta coisa! São <b>nutrientes, ar e água</b> — os três."]},
+    {q:"Como se chamam os pequenos aglomerados formados quando os grãos do solo são ligados por uma substância aglutinadora?",
+     a:["Agregados","Poros","Nascentes","Afloramentos"], c:0,
+     fb:["Isso! Os agregados armazenam água e permitem a circulação do ar.",
+         "Poros são os <b>espaços vazios</b> entre os grãos. Os aglomerados são os <b>agregados</b>.",
+         "Nascente é a água voltando à superfície. Aqui são os <b>agregados</b>.",
+         "Afloramento é rocha exposta na superfície (Galeria 8). Aqui são os <b>agregados</b>."]}
+  ]
+},
+/* ---------------- GALERIA 8 ---------------- */
+{
+  n:"Galeria 8", nome:"Como o solo se forma: a rocha-mãe", pag:"páginas 73, 74 e 81",
+  texto:`
+  <p>Agora vamos cavar bem fundo, até o começo de tudo. Ao longo de <b class="destaque">milhares de anos</b>, os solos
+  onde pisamos vêm sendo formados principalmente pelo <b class="destaque">desgaste de rochas</b>.</p>
+  <p>As rochas são quebradas em pedaços menores pela ação de quatro agentes:</p>
+  <div class="caixa-chave">
+    <h4>⛰️ Os agentes que desgastam a rocha</h4>
+    <ul>
+      <li>💧 as <b>chuvas</b> (a água);</li>
+      <li>☀️ o <b>Sol</b> (o calor e o frio);</li>
+      <li>💨 o <b>vento</b>;</li>
+      <li>🌱 os <b>seres vivos</b>, como as <b>raízes das plantas</b>.</li>
+    </ul>
+  </div>
+  <div class="caixa-chave">
+    <h4>🕰️ A história da formação do solo, passo a passo</h4>
+    <ul>
+      <li>1. Há milhares de anos, a Terra era formada <b>apenas por rochas</b>.</li>
+      <li>2. Com chuvas, ventos, calor e frio, as rochas começaram a <b>trincar e a se desgastar</b>, acumulando
+      <b>fragmentos</b> sobre a superfície.</li>
+      <li>3. Alguns <b>seres vivos se desenvolveram nos fragmentos de rocha</b> e ajudaram a formar os solos.</li>
+      <li>4. Pouco a pouco, outras plantas e animais se desenvolveram, e esse processo <b>continua até hoje</b>.</li>
+      <li>5. Os primeiros seres vivos, ao morrerem, foram <b>decompostos por bactérias e fungos</b> — e assim se formou
+      <b>matéria orgânica misturada aos grãos</b>.</li>
+    </ul>
+  </div>
+  <p>A rocha que deu origem a um solo tem nome: é a <b class="destaque">ROCHA-MÃE</b> (também chamada de rocha-matriz).
+  As <b>rachaduras</b> que foram se formando nela permitiram que a água das chuvas penetrasse e se acumulasse nas camadas
+  mais profundas — foi assim que se originaram os <b>lençóis de água subterrâneos</b>.</p>
+  <div class="caixa-chave">
+    <h4>🪨 Afloramento</h4>
+    <p style="margin:6px 0 0;">Em muitos lugares vemos <b>rochas expostas na superfície</b>, que continuam se desgastando
+    com o tempo. Elas são chamadas de <b>AFLORAMENTOS</b> e <b>fazem parte da rocha-mãe</b> do solo.</p>
+  </div>
+  <div class="caixa-chave">
+    <h4>🥞 As camadas do solo</h4>
+    <ul>
+      <li>A camada <b>de cima</b> é a <b>mais escura</b>: é onde há <b>maior quantidade de matéria orgânica</b>.</li>
+      <li>A camada <b>mais profunda</b> é mais <b>avermelhada</b> (compostos de ferro) e tem mais parte mineral.</li>
+      <li><b>Embaixo de tudo</b> fica a <b>rocha-mãe</b>.</li>
+    </ul>
+  </div>
+  <div class="curiosidade">🪱 <b>Ditado popular do livro:</b> "Água mole em pedra dura, tanto bate até que fura." As ondas
+  do mar, ao baterem sempre na mesma rocha, provocam desgaste e até furam a rocha. É exatamente assim que o solo
+  nasce — devagarinho, mas sem parar.</div>`,
+  qs:[
+    {q:"Como os solos são formados, principalmente?",
+     a:["Pelo desgaste de rochas ao longo de milhares de anos","Pela chuva que cai em um dia só","Pelas minhocas que fabricam terra","Pelo lixo que as pessoas jogam no chão"], c:0,
+     fb:["Isso! Pelo desgaste de rochas, quebradas em pedaços menores ao longo de milhares de anos.",
+         "A chuva ajuda, mas o processo leva <b>milhares de anos</b> — não um dia.",
+         "As minhocas ajudam o solo, mas não o fabricam. O solo vem do <b>desgaste das rochas</b>.",
+         "Lixo é poluição, não formação. O solo vem do <b>desgaste das rochas</b>."]},
+    {q:"Qual destes NÃO é um agente que desgasta as rochas e forma o solo?",
+     a:["A chuva","O vento","O asfalto","As raízes das plantas"], c:2,
+     fb:["A chuva é um dos agentes citados pelo livro.",
+         "O vento é um dos agentes citados pelo livro.",
+         "Isso! O asfalto é feito pelas pessoas e, na verdade, <b>impermeabiliza</b> o solo. Os agentes são chuva, Sol, vento e seres vivos.",
+         "As raízes das plantas são um dos agentes citados pelo livro."]},
+    {q:"O que é a ROCHA-MÃE?",
+     a:["A maior pedra de um rio","A rocha que deu origem a um solo","Uma rocha feita de húmus","A camada mais escura do solo"], c:1,
+     fb:["Não é pelo tamanho. Rocha-mãe é a rocha que <b>deu origem</b> ao solo.",
+         "Isso! Também chamada de rocha-matriz. Quando aparece exposta na superfície, chamamos de <b>afloramento</b>.",
+         "Húmus é matéria orgânica, não rocha. Rocha-mãe é a rocha que <b>deu origem</b> ao solo.",
+         "A camada escura é a de cima, cheia de matéria orgânica. A rocha-mãe fica <b>embaixo de tudo</b>."]}
+  ]
+},
+/* ---------------- GALERIA 9 ---------------- */
+{
+  n:"Galeria 9", nome:"O ser humano usa o solo: agricultura e pecuária", pag:"páginas 88, 89 e 90",
+  texto:`
+  <p>Começa aqui a <b>Unidade 10</b>! Agora eu, a Mina, vou subir de volta para a superfície para a gente ver o que as
+  pessoas fazem com o solo.</p>
+  <p>O solo é um recurso usado pelo ser humano <b>há muito tempo</b>: para o <b>cultivo de alimentos</b> e para a
+  <b>criação de animais</b> há <b>milhares de anos</b>. As <b>moradias</b> também são construídas sobre o solo, de onde
+  ainda se extraem muitos materiais para a construção civil.</p>
+  <div class="curiosidade">⚠️ <b>Frase importante do livro:</b> por essas e outras razões, o solo <b>já foi muito
+  modificado</b> pelo ser humano. Atualmente <b>existem poucas áreas de matas nativas recobrindo-o</b>.</div>
+  <h4 style="color:#6B4226;margin-top:22px;">🌾 AGRICULTURA</h4>
+  <p>Na agricultura, o solo é usado para o <b>cultivo de plantas</b>. E para que servem essas plantas?</p>
+  <div class="caixa-chave">
+    <h4>🌽 Três finalidades do cultivo</h4>
+    <ul>
+      <li><b>Alimento</b> para a população humana e para os animais de criação;</li>
+      <li><b>combustíveis</b> — é o caso da <b>cana-de-açúcar</b>, usada para produzir <b>etanol</b>;</li>
+      <li><b>matérias-primas</b> para as indústrias de <b>papel</b> e de <b>móveis</b> e para construções — por exemplo
+      as plantações de <b>pinheiros (Pinus)</b> e de <b>eucaliptos</b>. O eucalipto fornece madeira, energia e
+      <b>celulose para a produção de papel</b>.</li>
+    </ul>
+  </div>
+  <div class="caixa-chave">
+    <h4>🚜 Agricultura intensiva — o que ela causa</h4>
+    <p style="margin:6px 0;"><b>Agricultura intensiva</b> é o modo de produção agrícola que busca <b>grande
+    produtividade no menor tempo possível</b>. Para usar o solo assim:</p>
+    <ul>
+      <li>áreas de florestas podem sofrer <b>desmatamento</b>;</li>
+      <li>o solo é <b>compactado por máquinas pesadas</b>;</li>
+      <li>são utilizados <b>adubos químicos e defensivos agrícolas</b>.</li>
+    </ul>
+  </div>
+  <h4 style="color:#6B4226;margin-top:22px;">🐄 PECUÁRIA</h4>
+  <p>A <b>pecuária</b> é a <b class="destaque">atividade de criação de animais</b>. Por meio dela são obtidos
+  <b>carne, couro, lã, leite e ovos</b>.</p>
+  <div class="caixa-chave">
+    <h4>🐓 Os nomes conforme a criação</h4>
+    <ul>
+      <li><b>avicultura</b> → aves</li>
+      <li><b>ovinocultura</b> → ovelhas</li>
+      <li><b>pecuária de corte</b> → carne de bovinos</li>
+      <li><b>pecuária de leite</b> → leite de vaca</li>
+      <li><b>piscicultura</b> → peixes</li>
+      <li><b>suinocultura</b> → porcos</li>
+    </ul>
+  </div>
+  <p>No Brasil, a <b>pecuária de corte</b> e a produção de <b>laticínios</b> de bovinos são muito desenvolvidas.</p>
+  <p>E qual é o problema? Os animais precisam de <b>pastos com capim</b>. Para formar pasto, <b class="destaque">grandes
+  áreas são compactadas pelo pisoteamento dos animais</b> ou pela construção de edificações para a criação.</p>`,
+  qs:[
+    {q:"O que é a PECUÁRIA?",
+     a:["O cultivo de plantas no solo","A atividade de criação de animais","A retirada de minerais do solo","A construção de moradias"], c:1,
+     fb:["Isso é a <b>agricultura</b>. Pecuária é a criação de <b>animais</b>.",
+         "Isso! E dela se obtêm carne, couro, lã, leite e ovos.",
+         "Isso é a <b>mineração</b>. Pecuária é a criação de <b>animais</b>.",
+         "Isso faz parte da urbanização. Pecuária é a criação de <b>animais</b>."]},
+    {q:"Qual destas plantas o livro cita como cultivada para produzir COMBUSTÍVEL (etanol)?",
+     a:["O eucalipto","O tomate","A cana-de-açúcar","O capim do pasto"], c:2,
+     fb:["O eucalipto serve para energia, madeira e <b>celulose para papel</b>. O combustível vem da <b>cana-de-açúcar</b>.",
+         "O tomate é alimento. O etanol vem da <b>cana-de-açúcar</b>.",
+         "Isso! A cana-de-açúcar é usada para produzir <b>etanol</b>.",
+         "O capim alimenta o gado. O etanol vem da <b>cana-de-açúcar</b>."]},
+    {q:"Como a pecuária pode prejudicar o solo?",
+     a:["Grandes áreas ficam compactadas pelo pisoteamento dos animais","O gado come todas as minhocas do solo","Os animais deixam o solo mais avermelhado","A pecuária aumenta a quantidade de mata nativa"], c:0,
+     fb:["Isso! O pisoteamento e as construções para a criação compactam grandes áreas.",
+         "Não é isso. O problema é a <b>compactação pelo pisoteamento</b>.",
+         "A cor vermelha vem do ferro das rochas. O problema da pecuária é a <b>compactação</b>.",
+         "É o contrário: para fazer pasto, a mata nativa costuma ser <b>retirada</b>."]}
+  ]
+},
+/* ---------------- GALERIA 10 ---------------- */
+{
+  n:"Galeria 10", nome:"Urbanização e mineração", pag:"páginas 91 e 93",
+  texto:`
+  <h4 style="color:#6B4226;">🏙️ CONSTRUÇÃO DE MORADIAS E URBANIZAÇÃO</h4>
+  <p>O solo serve de <b>base para a construção de todas as estruturas que abrigam as pessoas</b>.</p>
+  <p>Quando a população de um lugar cresce, é preciso construir muitas moradias — e também <b>escolas, hospitais,
+  estabelecimentos comerciais e indústrias</b>, além do <b>asfaltamento das ruas</b> e da instalação de <b>energia
+  elétrica e de redes de água e esgoto</b>.</p>
+  <div class="caixa-chave">
+    <h4>🏗️ O que é URBANIZAÇÃO</h4>
+    <p style="margin:6px 0 0;">Quando isso acontece, o espaço que antes era considerado <b>rural ou natural</b>
+    (florestas e campos) <b class="destaque">se transforma em um espaço urbano</b>. Chamamos esse processo de
+    <b>URBANIZAÇÃO</b>.</p>
+    <p style="margin:8px 0 0;">O crescimento das áreas urbanas <b>deve ser planejado</b>, para garantir que todas as
+    pessoas tenham moradia e serviços adequados.</p>
+  </div>
+  <h4 style="color:#6B4226;margin-top:22px;">⛏️ MINERAÇÃO</h4>
+  <div class="caixa-chave">
+    <h4>O que é MINERAÇÃO</h4>
+    <p style="margin:6px 0 0;">É o processo pelo qual são <b class="destaque">retirados minerais do solo</b>, como o
+    <b>minério de ferro</b>, a <b>bauxita</b> e o <b>calcário</b>.</p>
+    <p style="margin:8px 0 0;">⚠️ Nesse processo de extração, <b>grandes áreas são desmatadas</b> para que seja possível
+    acessar o solo e o subsolo onde estão as rochas que contêm os minérios.</p>
+  </div>
+  <div class="curiosidade">📅 <b>Dia Mundial do Solo — 5 de dezembro.</b> Essa data foi instituída pela <b>FAO</b>
+  (Organização das Nações Unidas para Agricultura e Alimentação). O solo produz a alimentação humana e animal, conserva a
+  biodiversidade e os ciclos naturais, reduz o impacto das mudanças climáticas, gera bioenergia, sustenta construções e
+  <b>protege as águas subterrâneas e superficiais como filtro e armazém</b>.</div>`,
+  qs:[
+    {q:"O que é a URBANIZAÇÃO?",
+     a:["O processo em que o espaço rural ou natural se transforma em espaço urbano","O processo de retirar minerais do solo","A perda de grãos do solo pela chuva","O plantio de árvores numa cidade"], c:0,
+     fb:["Isso! Florestas e campos vão dando lugar a moradias, escolas, comércio, indústrias e ruas asfaltadas.",
+         "Isso é a <b>mineração</b>. Urbanização é o espaço rural virando urbano.",
+         "Isso é a <b>erosão</b> (você vai ver na próxima galeria!).",
+         "Plantar árvores é bom, mas urbanização é o <b>espaço rural virando urbano</b>."]},
+    {q:"Quais destes minerais o livro cita como retirados do solo pela mineração?",
+     a:["Húmus, areia e argila","Minério de ferro, bauxita e calcário","Etanol, celulose e papel","Carne, couro e leite"], c:1,
+     fb:["Húmus é matéria orgânica, e areia e argila são grãos do solo. Os minérios citados são <b>ferro, bauxita e calcário</b>.",
+         "Isso mesmo, exatamente os três que o livro cita.",
+         "Esses vêm da <b>agricultura</b> (cana e eucalipto), não da mineração.",
+         "Esses vêm da <b>pecuária</b>, não da mineração."]},
+    {q:"Por que a mineração costuma prejudicar o ambiente?",
+     a:["Porque deixa o solo mais fértil demais","Porque grandes áreas são desmatadas para acessar o solo e o subsolo","Porque enche o solo de húmus","Porque faz chover em excesso"], c:1,
+     fb:["Não. O problema é o <b>desmatamento</b> de grandes áreas.",
+         "Isso! É preciso desmatar grandes áreas para chegar às rochas que contêm os minérios.",
+         "O húmus é bom para o solo. O problema da mineração é o <b>desmatamento</b>.",
+         "A mineração não controla a chuva. O problema é o <b>desmatamento</b> de grandes áreas."]}
+  ]
+},
+/* ---------------- GALERIA 11 ---------------- */
+{
+  n:"Galeria 11", nome:"Problemas no uso do solo", pag:"páginas 94 e 95",
+  texto:`
+  <p>O uso do solo nas atividades humanas pode causar a <b>degradação</b> desse recurso. O livro lista as principais
+  consequências do mau uso:</p>
+  <div class="caixa-chave">
+    <h4>⚠️ As 4 consequências do mau uso do solo</h4>
+    <ul>
+      <li>a <b>EROSÃO</b>;</li>
+      <li>o <b>ASSOREAMENTO</b>;</li>
+      <li>a <b>IMPERMEABILIZAÇÃO</b>;</li>
+      <li>a <b>POLUIÇÃO</b> por resíduos e esgotos.</li>
+    </ul>
+  </div>
+  <h4 style="color:#6B4226;margin-top:22px;">🌧️ EROSÃO</h4>
+  <p>A erosão é um processo que causa a <b class="destaque">perda de grãos e de matéria orgânica do solo</b>. É provocada
+  principalmente pela <b>água</b> e pelos <b>ventos</b>, em especial nos locais em que a <b>floresta foi retirada</b>.</p>
+  <p>Sem a vegetação, o solo — que também era coberto por uma camada de folhas chamada <b class="destaque">SERAPILHEIRA</b>
+  — fica <b>exposto</b> à ação da água e dos ventos. As gotas de chuva caem <b>atingindo com força</b> a superfície e,
+  quando a água escorre, ela <b>arrasta os grãos</b> e forma <b>fissuras</b>.</p>
+  <p>Esse processo geralmente é <b>mais intenso em terrenos inclinados</b> (morros, encostas).</p>
+  <div class="caixa-chave">
+    <h4>🕳️ VOÇOROCA</h4>
+    <p style="margin:6px 0 0;">Quando ocorre a erosão de <b>extensas áreas</b> de solo, pode acontecer o fenômeno
+    conhecido como <b>voçoroca</b>: a formação de <b>grandes buracos no solo</b>.</p>
+  </div>
+  <h4 style="color:#6B4226;margin-top:22px;">🏞️ ASSOREAMENTO</h4>
+  <p>Caso haja erosão <b>perto de um rio</b>, pode ocorrer também o assoreamento: o <b class="destaque">acúmulo de grãos
+  do solo arrastados pela água da chuva para dentro de rios, córregos e lagos</b>.</p>
+  <p>Em muitos casos, o assoreamento pode <b>bloquear o fluxo</b> de rios e córregos, fazendo com que
+  <b>transbordem</b>. Por isso retirar a vegetação das <b>margens</b> de um rio é tão ruim: o solo fica mais exposto e
+  mais material é arrastado para o fundo do rio.</p>
+  <h4 style="color:#6B4226;margin-top:22px;">🛣️ IMPERMEABILIZAÇÃO</h4>
+  <p>Solos em que há <b>vegetação são permeáveis</b>, pois as <b>raízes das plantas</b> possibilitam que a água se
+  infiltre e chegue às camadas mais profundas.</p>
+  <p>Mas se o solo for <b>impermeabilizado</b> — ou seja, <b class="destaque">coberto por asfalto, concreto ou mesmo por
+  construções</b> — a água <b>não consegue se infiltrar</b>, podendo se acumular e ocasionar muitas vezes
+  <b>alagamentos e enchentes</b>.</p>
+  <div class="curiosidade">🪱 <b>A Mina resume:</b> tirou a planta → chega erosão. Erosão perto do rio → vira
+  assoreamento. Cobriu de asfalto → vira alagamento.</div>`,
+  qs:[
+    {q:"O que é a EROSÃO?",
+     a:["O acúmulo de grãos dentro dos rios","O processo que causa a perda de grãos e de matéria orgânica do solo","A cobertura do solo com asfalto","A mistura da terra feita pelas minhocas"], c:1,
+     fb:["Esse é o <b>assoreamento</b>. A erosão é a <b>perda</b> de grãos e matéria orgânica do solo.",
+         "Isso! E ela é provocada principalmente pela água e pelos ventos, onde a floresta foi retirada.",
+         "Essa é a <b>impermeabilização</b>. A erosão é a <b>perda</b> de grãos e matéria orgânica.",
+         "Essa é o <b>revolvimento</b>, e é coisa boa! A erosão é a <b>perda</b> de grãos e matéria orgânica."]},
+    {q:"Como se chama a camada de folhas que cobre o solo da floresta e ajuda a protegê-lo?",
+     a:["Húmus","Serapilheira","Agregado","Afloramento"], c:1,
+     fb:["O húmus é a matéria orgânica <b>já decomposta</b>, misturada à terra. A camada de folhas por cima é a <b>serapilheira</b>.",
+         "Isso! Sem ela, o solo fica exposto à ação da água e dos ventos.",
+         "Agregados são os aglomerados de grãos dentro do solo. A camada de folhas é a <b>serapilheira</b>.",
+         "Afloramento é rocha exposta na superfície. A camada de folhas é a <b>serapilheira</b>."]},
+    {q:"Numa cidade com muito asfalto e concreto, por que acontecem alagamentos quando chove forte?",
+     a:["Porque o solo impermeabilizado não deixa a água se infiltrar, e ela se acumula","Porque o asfalto atrai a chuva","Porque o solo da cidade é todo arenoso","Porque as minhocas tapam os buracos"], c:0,
+     fb:["Isso! Sem infiltração, a água se acumula na superfície e pode causar alagamentos e enchentes.",
+         "O asfalto não atrai chuva. Ele <b>impede a infiltração</b> da água.",
+         "O solo arenoso deixa a água passar rápido. O problema aqui é o <b>asfalto e o concreto</b>.",
+         "As minhocas, ao contrário, <b>abrem</b> galerias que ajudam a água a entrar!"]}
+  ]
+},
+/* ---------------- GALERIA 12 ---------------- */
+{
+  n:"Galeria 12", nome:"Boas práticas que protegem o solo", pag:"páginas 98 a 102",
+  texto:`
+  <p>Para evitar a degradação, é preciso <b>planejar as atividades</b> de maneira que elas atendam às nossas
+  necessidades — como a alimentação e a extração de matéria-prima — <b class="destaque">sem prejudicar o uso desses
+  recursos pelas gerações futuras</b>.</p>
+  <div class="caixa-chave">
+    <h4>🛡️ CONSERVAÇÃO DO SOLO — a regra de ouro</h4>
+    <p style="margin:6px 0;">Para o solo se manter saudável, é preciso que as atividades humanas o alterem <b>o mínimo
+    possível</b>, a fim de que ele <b>não se desestruture</b>.</p>
+    <p style="margin:6px 0;">A matéria orgânica, na forma de <b>húmus</b>, mantém os grãos <b>aglomerados</b>,
+    facilitando a entrada de água e ar.</p>
+    <p style="margin:6px 0 0;">👉 Portanto: <b class="destaque">quanto menos o solo for remexido, melhor</b>.</p>
+  </div>
+  <h4 style="color:#6B4226;margin-top:22px;">🌾 PLANTIO DIRETO</h4>
+  <p>É uma técnica da agricultura em que uma <b>nova plantação é feita sobre o que restou da plantação anterior</b>.</p>
+  <p>Por exemplo: depois da colheita do milho, os pés morrem e secam. No cultivo convencional, eles seriam derrubados e
+  queimados, ou incorporados ao solo por máquinas que <b>revolvem a terra</b>. Já no plantio direto, os pés de milho são
+  <b>apenas derrubados</b> e as novas sementes são plantadas por cima.</p>
+  <div class="caixa-chave">
+    <h4>✅ O que o plantio direto faz de bom</h4>
+    <ul>
+      <li>Os pés antigos funcionam como uma <b>cobertura para o solo</b>;</li>
+      <li>protegem o solo <b>contra a erosão</b>;</li>
+      <li>mantêm o solo <b>úmido por mais tempo</b>;</li>
+      <li><b>melhoram a fertilidade</b>, pois evitam a perda de matéria orgânica.</li>
+    </ul>
+  </div>
+  <h4 style="color:#6B4226;margin-top:22px;">🔄 ROTAÇÃO DE CULTURA</h4>
+  <p>É uma técnica em que o plantio das culturas vegetais é <b class="destaque">alternado</b> em determinada área. Essa
+  prática <b>evita que os nutrientes do solo se esgotem</b>.</p>
+  <p>Exemplo do livro: um terreno é dividido em <b>quatro partes</b>, nas quais são plantados <b>tremoço, soja, milho e
+  trigo</b> — mas em <b>locais diferentes em cada época</b>.</p>
+  <h4 style="color:#6B4226;margin-top:22px;">🌿 ADUBAÇÃO VERDE</h4>
+  <p>Usa <b>algumas plantas que ajudam a manter a qualidade do solo</b> junto com as culturas que se deseja plantar.</p>
+  <p>Exemplo: em meio à cultura de <b>soja</b> pode-se plantar a <b>crotalária</b>, que ajuda a soja a crescer forte e
+  saudável. Outras plantas usadas como adubo verde: <b>mucuna, feijão-bravo e amendoim-forrageiro</b>.</p>
+  <p>Com a adubação verde, a necessidade de <b>adubos químicos é reduzida</b> e o solo é <b>prevenido contra a
+  erosão</b>, pois a área da plantação fica <b>toda coberta pela vegetação</b>.</p>
+  <h4 style="color:#6B4226;margin-top:22px;">🌳 MANUTENÇÃO DAS FLORESTAS</h4>
+  <div class="caixa-chave">
+    <h4>Dois sistemas que juntam produzir e preservar</h4>
+    <ul>
+      <li><b>SISTEMA AGROFLORESTAL (agrofloresta)</b> — cultivam-se vegetais como <b>milho, feijão, abóbora e
+      mandioca</b> junto com <b>plantas frutíferas</b> (banana, limão, mamão) e <b>plantas arbóreas</b> (andiroba,
+      copaíba).</li>
+      <li><b>SISTEMA SILVIPASTORIL</b> — a <b>criação de galinhas, bois e vacas</b> ocorre <b>em meio a plantações</b>,
+      numa mesma área.</li>
+    </ul>
+    <p style="margin:8px 0 0;">Nos dois, as <b>árvores protegem o solo da luz solar e da chuva</b> e <b>mantêm a
+    umidade</b> por causa do <b>sombreamento</b>. As <b>folhas e os galhos que caem repõem a matéria orgânica</b> e
+    podem contribuir para <b>recuperar áreas desmatadas</b>.</p>
+  </div>
+  <h4 style="color:#6B4226;margin-top:22px;">🧑‍🔬 AGROECOLOGIA E AGRICULTURA ORGÂNICA</h4>
+  <p>A <b>agroecologia</b> é uma área de <b>pesquisa</b> que reúne conhecimentos sobre <b>como cuidar do solo</b> para
+  que as plantas cresçam saudáveis. Uma das primeiras pessoas a aplicar esse conceito no Brasil foi a
+  engenheira-agrônoma <b>Ana Maria Primavesi (1920-2020)</b>.</p>
+  <p>A <b>agricultura orgânica</b> usa o conhecimento da agroecologia para produzir alimentos conservando o solo e o
+  ambiente. Nela usam-se <b>adubos naturais</b>, como o <b>esterco curtido</b>, e <b class="destaque">NÃO são utilizados
+  adubos químicos nem defensivos agrícolas</b>.</p>`,
+  qs:[
+    {q:"No PLANTIO DIRETO, o que se faz com os restos da plantação anterior?",
+     a:["São queimados antes de plantar de novo","São deixados no lugar, servindo de cobertura para o solo","São levados embora por máquinas","São enterrados bem fundo"], c:1,
+     fb:["Queimar é o que se faz no cultivo <b>convencional</b>. No plantio direto, os restos <b>ficam</b>.",
+         "Isso! Os pés antigos cobrem o solo, protegem contra a erosão, mantêm a umidade e melhoram a fertilidade.",
+         "Não. A ideia é justamente <b>não remexer</b> o solo e deixar os restos cobrindo-o.",
+         "No plantio direto não se revolve a terra: os restos ficam <b>por cima</b>, cobrindo o solo."]},
+    {q:"Para que serve a ROTAÇÃO DE CULTURA?",
+     a:["Para evitar que os nutrientes do solo se esgotem","Para deixar o solo mais vermelho","Para aumentar a quantidade de asfalto","Para matar as minhocas do solo"], c:0,
+     fb:["Isso! Alternando as culturas na área, os nutrientes do solo não se esgotam.",
+         "A cor vem dos minerais. A rotação serve para <b>não esgotar os nutrientes</b>.",
+         "Asfalto impermeabiliza o solo — é um problema, não uma prática de conservação.",
+         "Pelo contrário: ela ajuda a manter o solo saudável para todos os seres que vivem nele."]},
+    {q:"Qual destas NÃO é uma prática que conserva o solo?",
+     a:["Adubação verde","Sistema agroflorestal","Agricultura e pecuária intensivas","Plantio direto"], c:2,
+     fb:["A adubação verde conserva: reduz adubos químicos e previne a erosão.",
+         "O sistema agroflorestal conserva: as árvores protegem o solo e repõem matéria orgânica.",
+         "Isso! A agricultura e a pecuária intensivas estão entre as atividades que <b>prejudicam</b> o solo (desmatamento, compactação, adubos químicos).",
+         "O plantio direto conserva: cobre o solo e evita a perda de matéria orgânica."]}
+  ]
+},
+/* ---------------- GALERIA 13 — REVISÃO ---------------- */
+{
+  n:"Galeria 13", nome:"Revisão Geral — a Mina mistura tudo!", pag:"revisão das Unidades 9 e 10",
+  texto:`
+  <p>🪱 Parabéns, jovem aprendiz! Você percorreu <b>todas as minhas galerias</b>. Agora vamos misturar tudo numa última
+  rodada — essas três perguntas juntam as duas unidades.</p>
+  <div class="caixa-chave">
+    <h4>🧠 Antes de responder, relembre num piscar de olhos</h4>
+    <ul>
+      <li><b>Grãos:</b> argila &lt; silte &lt; areia · <b>texturas:</b> áspera / sedosa / pegajosa.</li>
+      <li><b>Cores:</b> vermelho = ferro · escuro = matéria orgânica.</li>
+      <li><b>Água:</b> infiltra → lençol subterrâneo → nascente → riacho → rio. Depósitos = aquíferos.</li>
+      <li><b>Vida:</b> bactérias e fungos decompõem · minhocas e formigas cavam galerias e revolvem.</li>
+      <li><b>Húmus:</b> deixa a terra escura, fofa, úmida e pegajosa e é rico em nutrientes.</li>
+      <li><b>Formação:</b> desgaste da <b>rocha-mãe</b> por chuva, Sol, vento e seres vivos, em milhares de anos.</li>
+      <li><b>Usos:</b> agricultura, pecuária, urbanização, mineração.</li>
+      <li><b>Problemas:</b> erosão (voçoroca), assoreamento, impermeabilização, poluição.</li>
+      <li><b>Boas práticas:</b> plantio direto, rotação de cultura, adubação verde, agrofloresta, silvipastoril,
+      agricultura orgânica.</li>
+    </ul>
+  </div>`,
+  qs:[
+    {q:"Um terreno tinha floresta. As árvores foram cortadas e, pouco tempo depois, a chuva forte abriu um grande buraco no morro e encheu o rio de terra. O que aconteceu, na ordem certa?",
+     a:["Primeiro assoreamento, depois erosão","Primeiro impermeabilização, depois urbanização","Primeiro erosão (que virou voçoroca), depois assoreamento do rio","Primeiro decomposição, depois formação de húmus"], c:2,
+     fb:["É o contrário! Primeiro o solo <b>perde</b> os grãos (erosão); depois esses grãos se acumulam no rio (assoreamento).",
+         "Impermeabilização é cobrir com asfalto ou concreto — não foi o que aconteceu aqui.",
+         "Perfeito! Sem a vegetação veio a erosão, que em áreas extensas forma a <b>voçoroca</b>; os grãos arrastados até o rio causam o <b>assoreamento</b>.",
+         "Decomposição e húmus são processos bons, que acontecem dentro do solo saudável."]},
+    {q:"Por que a floresta protege tão bem o solo?",
+     a:["Porque a serapilheira e as raízes amortecem a chuva e seguram os grãos do solo","Porque a floresta impede que chova","Porque as árvores deixam o solo impermeável","Porque não existem seres vivos no solo da floresta"], c:0,
+     fb:["Isso! A camada de folhas (serapilheira) e as raízes evitam que a água arraste os grãos.",
+         "Chover, chove. A floresta protege porque <b>amortece</b> a chuva e <b>segura</b> o solo.",
+         "É o contrário: solos com vegetação são <b>permeáveis</b> — as raízes ajudam a água a infiltrar.",
+         "O solo da floresta é cheio de vida: fungos, bactérias, minhocas, tatuzinhos…"]},
+    {q:"Qual destas frases está CERTA sobre a composição do solo?",
+     a:["Os materiais inorgânicos são formados pela decomposição de restos de seres vivos","Os materiais orgânicos são formados pela decomposição de restos de seres vivos","O solo é formado apenas por materiais orgânicos","O plástico faz parte da composição natural do solo"], c:1,
+     fb:["Essa frase está trocada! Quem vem da decomposição de restos de seres vivos é a parte <b>orgânica</b>.",
+         "Isso! É exatamente essa a frase verdadeira do exercício da página 75.",
+         "Não: o solo tem materiais <b>inorgânicos E orgânicos</b>.",
+         "Não! O plástico é lixo. A composição natural tem areia, argila, silte e restos de seres vivos."]}
+  ]
+}
+];
+/* ============== MAPA MENTAL PARA ENCAIXAR ============== */
+var MAPA = [
+ {cor:"#4CAF50", titulo:"🧱 Do que o solo é feito",
+  itens:[
+    {t:"fixo", txt:"parte mineral + parte orgânica"},
+    {t:"fixo", txt:"espaços com ar e água"},
+    {t:"lacuna", id:"L1", dica:"grão mais fino; molhado vira barro", certa:"argila", outra:"serapilheira"},
+    {t:"fixo", txt:"silte (tamanho do meio)"},
+    {t:"lacuna", id:"L2", dica:"grão maior, duro e com brilho", certa:"areia", outra:"húmus"}
+  ]},
+ {cor:"#F2B705", titulo:"🔎 Características do solo",
+  itens:[
+    {t:"lacuna", id:"L3", dica:"depende da proporção dos grãos; sente-se pelo tato", certa:"textura", outra:"decomposição"},
+    {t:"fixo", txt:"cor: vermelho = ferro · escuro = matéria orgânica"},
+    {t:"lacuna", id:"L4", dica:"deixar a água circular pelos poros", certa:"permeabilidade", outra:"urbanização"},
+    {t:"fixo", txt:"porosidade (quanto mais espaços, mais poroso)"},
+    {t:"fixo", txt:"agregados = solo estruturado = fértil"}
+  ]},
+ {cor:"#2F80C2", titulo:"💧 Água e vida no solo",
+  itens:[
+    {t:"fixo", txt:"a chuva infiltra → lençol de água subterrâneo"},
+    {t:"fixo", txt:"nascente → riacho → rio"},
+    {t:"lacuna", id:"L5", dica:"grandes depósitos de água subterrânea", certa:"aquíferos", outra:"agregados"},
+    {t:"fixo", txt:"bactérias e fungos fazem a decomposição"},
+    {t:"fixo", txt:"minhocas e formigas cavam galerias e revolvem"},
+    {t:"lacuna", id:"L6", dica:"matéria orgânica decomposta; deixa a terra escura e fofa", certa:"húmus", outra:"silte"}
+  ]},
+ {cor:"#8C5A33", titulo:"⛰️ Como o solo se forma",
+  itens:[
+    {t:"fixo", txt:"desgaste das rochas em milhares de anos"},
+    {t:"fixo", txt:"agentes: chuva, Sol, vento e seres vivos"},
+    {t:"lacuna", id:"L7", dica:"a rocha que deu origem ao solo", certa:"rocha-mãe", outra:"aquífero"},
+    {t:"fixo", txt:"afloramento = rocha exposta na superfície"}
+  ]},
+ {cor:"#E89B2B", titulo:"🚜 Usos do solo pelo ser humano",
+  itens:[
+    {t:"fixo", txt:"agricultura (cultivo de plantas)"},
+    {t:"lacuna", id:"L8", dica:"atividade de criação de animais", certa:"pecuária", outra:"rotação de cultura"},
+    {t:"fixo", txt:"urbanização (rural/natural vira urbano)"},
+    {t:"fixo", txt:"mineração (ferro, bauxita, calcário)"}
+  ]},
+ {cor:"#E2483D", titulo:"⚠️ Problemas no uso do solo",
+  itens:[
+    {t:"lacuna", id:"L9", dica:"perda de grãos e de matéria orgânica do solo", certa:"erosão", outra:"decomposição"},
+    {t:"fixo", txt:"voçoroca = grandes buracos no solo"},
+    {t:"lacuna", id:"L10", dica:"acúmulo de grãos dentro de rios e lagos", certa:"assoreamento", outra:"infiltração"},
+    {t:"fixo", txt:"impermeabilização → alagamentos e enchentes"},
+    {t:"fixo", txt:"poluição por resíduos e esgotos"}
+  ]},
+ {cor:"#2E7D32", titulo:"🛡️ Boas práticas que protegem",
+  itens:[
+    {t:"lacuna", id:"L11", dica:"plantar sobre os restos da plantação anterior", certa:"plantio direto", outra:"mineração"},
+    {t:"lacuna", id:"L12", dica:"alternar as culturas para não esgotar os nutrientes", certa:"rotação de cultura", outra:"pecuária"},
+    {t:"fixo", txt:"adubação verde (crotalária na soja)"},
+    {t:"fixo", txt:"agrofloresta e sistema silvipastoril"},
+    {t:"fixo", txt:"agricultura orgânica (sem adubo químico)"}
+  ]}
+];
+
+/* ============== VERDADEIRO OU FALSO (banco de 22; sorteia 12) ============== */
+var VF = [
+ {f:"O solo é aquilo que, na linguagem popular, chamamos de terra.", v:true,
+  e:"Verdade! É assim que o livro começa a Unidade 9."},
+ {f:"O solo existe só nos ambientes terrestres; no fundo dos rios e do mar não há solo.", v:false,
+  e:"Falso. O solo recobre TODA a superfície do planeta: ambientes terrestres E aquáticos."},
+ {f:"A argila tem os grãos menores; a areia tem os grãos maiores.", v:true,
+  e:"Verdade! A ordem crescente é argila → silte → areia."},
+ {f:"O silte tem grãos maiores que os da areia.", v:false,
+  e:"Falso. O silte tem tamanho INTERMEDIÁRIO: maior que a argila e menor que a areia."},
+ {f:"Quando molhada, a argila forma barro e pode até ser moldada.", v:true,
+  e:"Verdade! E, quando seca, ela vira um pó fininho."},
+ {f:"O solo arenoso tem textura pegajosa, que gruda nos dedos.", v:false,
+  e:"Falso. O arenoso é ÁSPERO. Quem é pegajoso é o ARGILOSO (o siltoso é sedoso)."},
+ {f:"Um solo avermelhado indica a presença de compostos de ferro.", v:true,
+  e:"Verdade! Rochas com minério de ferro formam solos avermelhados, ricos em ferro."},
+ {f:"Um solo bem escuro indica que ele tem pouca matéria orgânica.", v:false,
+  e:"Falso. É o contrário: solo bem escuro indica MUITA matéria orgânica — e costuma ser fértil."},
+ {f:"A água da chuva infiltra no solo e forma os lençóis de água subterrâneos.", v:true,
+  e:"Verdade! E parte dessa água ocupa os espaços entre as rochas e os grãos."},
+ {f:"Os grandes depósitos de água subterrânea são chamados de aquíferos.", v:true,
+  e:"Verdade! E grande parte da água adequada para o consumo humano é subterrânea."},
+ {f:"O solo argiloso é mais permeável que o arenoso, por isso a água passa mais rápido nele.", v:false,
+  e:"Falso. É ao contrário: o ARENOSO é mais permeável (grãos maiores, mais espaços). O argiloso encharca."},
+ {f:"Quanto mais espaços (poros) há no solo, mais poroso ele é.", v:true,
+  e:"Verdade! Essa é a definição de porosidade no livro."},
+ {f:"As bactérias e os fungos do solo auxiliam na decomposição da matéria orgânica.", v:true,
+  e:"Verdade! Eles se alimentam de restos de seres vivos e liberam substâncias minerais para as plantas."},
+ {f:"As minhocas, ao cavar túneis, impedem a entrada de ar e água no solo.", v:false,
+  e:"Falso. É o contrário: os túneis PERMITEM a entrada de ar e de água até as raízes das plantas."},
+ {f:"O húmus deixa a terra escura, fofa, úmida e pegajosa e é rico em nutrientes.", v:true,
+  e:"Verdade! Ele se forma quando a matéria orgânica se decompõe."},
+ {f:"Para ser fértil, basta o solo ter nutrientes: ar e água não importam.", v:false,
+  e:"Falso. O solo fértil precisa fornecer às plantas nutrientes, ar E água — e para isso não pode estar compactado."},
+ {f:"A rocha que deu origem a um solo é chamada de rocha-mãe.", v:true,
+  e:"Verdade! Também chamada de rocha-matriz. Quando fica exposta na superfície, é um afloramento."},
+ {f:"Os solos se formam em poucos dias, logo depois de uma chuva forte.", v:false,
+  e:"Falso. Os solos vêm sendo formados ao longo de MILHARES DE ANOS, pelo desgaste das rochas."},
+ {f:"A pecuária é a atividade de criação de animais, da qual se obtêm carne, couro, lã, leite e ovos.", v:true,
+  e:"Verdade! E recebe nomes como avicultura, piscicultura, suinocultura e ovinocultura."},
+ {f:"A mineração retira minerais do solo, como minério de ferro, bauxita e calcário.", v:true,
+  e:"Verdade! E, para isso, grandes áreas são desmatadas."},
+ {f:"A erosão é o acúmulo de grãos do solo dentro dos rios e lagos.", v:false,
+  e:"Falso. Isso é o ASSOREAMENTO. A erosão é a PERDA de grãos e de matéria orgânica do solo."},
+ {f:"O plantio direto faz uma nova plantação sobre o que restou da plantação anterior.", v:true,
+  e:"Verdade! Os restos cobrem o solo, protegem contra a erosão e mantêm a umidade."},
+ {f:"A rotação de cultura evita que os nutrientes do solo se esgotem.", v:true,
+  e:"Verdade! O plantio das culturas é alternado na área, em épocas diferentes."},
+ {f:"Na agricultura orgânica são usados muitos adubos químicos e defensivos agrícolas.", v:false,
+  e:"Falso. Na agricultura orgânica NÃO se usam adubos químicos nem defensivos: usam-se adubos naturais, como esterco curtido."},
+ {f:"Cobrir o solo com asfalto e concreto ajuda a água da chuva a infiltrar melhor.", v:false,
+  e:"Falso. Isso é a impermeabilização: a água não infiltra, se acumula e causa alagamentos e enchentes."},
+ {f:"A serapilheira é a camada de folhas que cobre o solo e ajuda a protegê-lo.", v:true,
+  e:"Verdade! Quando a floresta é retirada, o solo perde essa proteção e fica exposto à água e ao vento."}
+];
+/* ============== RESUMO ============== */
+var RESUMO_TEMPO = [
+ {t:"Só rocha", d:"Há milhares de anos, a Terra era formada <b>apenas por rochas</b>."},
+ {t:"A rocha trinca", d:"Com <b>chuvas, ventos, calor e frio</b>, as rochas começaram a <b>trincar e a se desgastar</b>, acumulando <b>fragmentos</b> na superfície."},
+ {t:"Chegam os seres vivos", d:"Alguns <b>seres vivos se desenvolveram nos fragmentos de rocha</b> e ajudaram a formar os solos."},
+ {t:"Nasce a matéria orgânica", d:"Esses seres vivos, ao morrerem, foram <b>decompostos por bactérias e fungos</b>, formando <b>matéria orgânica misturada aos grãos</b>."},
+ {t:"A água entra", d:"As <b>rachaduras</b> da rocha deixaram a água da chuva penetrar e se acumular nas camadas profundas: nasceram os <b>lençóis de água subterrâneos</b>."},
+ {t:"O solo de hoje", d:"Pouco a pouco, outras plantas e animais se desenvolveram — e esse processo <b>continua até hoje</b>. Lá no fundo continua a <b>rocha-mãe</b>."}
+];
+
+var RESUMO_PALAVRAS = [
+ ["Solo","O que chamamos de terra. Recobre toda a superfície do planeta, nos ambientes terrestres e aquáticos."],
+ ["Argila","Grão mineral <b>muito pequeno</b>. Seco vira pó fininho; molhado forma barro e pode ser moldado."],
+ ["Silte","Grão mineral de tamanho <b>intermediário</b>: maior que a argila, menor que a areia."],
+ ["Areia","Grão mineral <b>duro, maior, claro e com brilho</b>. Comum nas praias e no fundo dos rios."],
+ ["Textura","Depende da <b>proporção entre areia, silte e argila</b>. Sente-se pelo tato: arenoso = áspera, siltoso = sedosa, argiloso = pegajosa."],
+ ["Permeabilidade","Característica de <b>deixar a água circular (infiltrar)</b> pelos espaços entre os grãos."],
+ ["Porosidade","Os espaços entre os grãos são os <b>poros</b>. Quanto mais espaços, <b>mais poroso</b> é o solo."],
+ ["Lençol de água subterrâneo","Água da chuva que infiltrou e se acumulou nas <b>camadas mais profundas</b> do solo."],
+ ["Nascente","Lugar onde a água do solo <b>volta à superfície</b>. Dá origem aos riachos, que formam os rios."],
+ ["Aquífero","<b>Grande depósito</b> de água subterrânea. Grande parte da água que bebemos vem daí."],
+ ["Revolvimento","Ação de <b>misturar a terra</b>. As minhocas e os insetos fazem isso naturalmente."],
+ ["Húmus","Material formado quando a <b>matéria orgânica se decompõe</b>. Deixa a terra escura, fofa, úmida e pegajosa; é rico em nutrientes."],
+ ["Agregados","Pequenos <b>aglomerados de grãos</b> ligados por substância aglutinadora (como o húmus). Armazenam água e deixam o ar circular."],
+ ["Solo fértil","Solo que fornece às plantas <b>nutrientes, ar e água</b>. Só acontece quando ele está <b>estruturado</b> (não compactado)."],
+ ["Rocha-mãe","A <b>rocha que deu origem</b> a um solo. Também chamada de rocha-matriz."],
+ ["Afloramento","<b>Rocha exposta</b> na superfície, que continua se desgastando. Faz parte da rocha-mãe."],
+ ["Agricultura","Uso do solo para o <b>cultivo de plantas</b>: alimento, combustível (cana → etanol) e matéria-prima (pinus e eucalipto → papel e móveis)."],
+ ["Agricultura intensiva","Modo de produção que busca <b>grande produtividade no menor tempo possível</b>. Causa desmatamento, compactação e uso de adubos químicos."],
+ ["Pecuária","Atividade de <b>criação de animais</b>: carne, couro, lã, leite e ovos. Avicultura, ovinocultura, piscicultura, suinocultura…"],
+ ["Urbanização","Processo em que o espaço <b>rural ou natural vira espaço urbano</b> (moradias, escolas, comércio, indústrias, asfalto)."],
+ ["Mineração","Processo de <b>retirar minerais do solo</b>: minério de ferro, bauxita e calcário. Desmata grandes áreas."],
+ ["Serapilheira","Camada de <b>folhas que cobre o solo</b> da floresta e o protege da chuva e do vento."],
+ ["Erosão","<b>Perda de grãos e de matéria orgânica</b> do solo, causada pela água e pelos ventos. Pior em terrenos inclinados."],
+ ["Voçoroca","<b>Grandes buracos no solo</b> formados quando a erosão atinge extensas áreas."],
+ ["Assoreamento","<b>Acúmulo de grãos do solo</b> arrastados para dentro de rios, córregos e lagos. Pode bloquear o rio e fazê-lo transbordar."],
+ ["Impermeabilização","Solo <b>coberto por asfalto, concreto ou construções</b>: a água não infiltra e causa alagamentos e enchentes."],
+ ["Plantio direto","Nova plantação feita <b>sobre o que restou</b> da plantação anterior. Cobre o solo, evita erosão e mantém a umidade."],
+ ["Rotação de cultura","Plantio das culturas <b>alternado</b> na área. <b>Evita que os nutrientes se esgotem</b>."],
+ ["Adubação verde","Plantar, junto com a cultura, plantas que ajudam o solo (<b>crotalária</b> na soja). Reduz adubo químico e previne erosão."],
+ ["Agrofloresta","Cultivo de milho, feijão, abóbora e mandioca <b>junto com frutíferas e árvores</b> (andiroba, copaíba)."],
+ ["Sistema silvipastoril","<b>Criação de animais em meio a plantações</b>, na mesma área. As árvores sombreiam e protegem o solo."],
+ ["Agroecologia","Área de <b>pesquisa</b> sobre como cuidar do solo. No Brasil, uma das pioneiras foi a engenheira-agrônoma <b>Ana Maria Primavesi</b> (1920-2020)."],
+ ["Agricultura orgânica","Produz alimentos conservando o solo. Usa <b>adubos naturais</b> (esterco curtido) e <b>não usa</b> adubos químicos nem defensivos."]
+];
+
+var RESUMO_DICAS = [
+ "🧱 <b>Decore a ordem dos grãos:</b> <b>argila &lt; silte &lt; areia</b> (a argila é a menorzinha).",
+ "✋ <b>Textura pelo tato:</b> arenoso = <b>áspera</b> · siltoso = <b>sedosa</b> · argiloso = <b>pegajosa</b>.",
+ "🎨 <b>Cor:</b> vermelho = <b>ferro</b> · escuro = <b>matéria orgânica</b> (solo fértil).",
+ "💧 <b>Caminho da água:</b> chuva → infiltra → <b>lençol subterrâneo</b> → <b>nascente</b> → riacho → rio. Depósito grande = <b>aquífero</b>.",
+ "⛰️ <b>4 agentes que formam o solo:</b> chuva, Sol, vento e seres vivos (raízes) — em <b>milhares de anos</b>.",
+ "🚜 <b>4 usos do solo:</b> agricultura, pecuária, urbanização e mineração.",
+ "⚠️ <b>4 problemas:</b> erosão, assoreamento, impermeabilização e poluição por resíduos e esgotos.",
+ "🛡️ <b>Boas práticas:</b> plantio direto, rotação de cultura, adubação verde, agrofloresta, silvipastoril e agricultura orgânica.",
+ "📅 <b>Dia Mundial do Solo:</b> 5 de dezembro (instituído pela FAO)."
+];
+
+var RESUMO_ALERTAS = [
+ "🚨 <b>Não confunda EROSÃO com ASSOREAMENTO!</b> Erosão = o solo <b>PERDE</b> os grãos. Assoreamento = os grãos perdidos <b>CHEGAM ao rio</b> e se acumulam lá. Primeiro a erosão, depois o assoreamento.",
+ "🚨 <b>Não confunda HÚMUS com SERAPILHEIRA.</b> Serapilheira = camada de <b>folhas em cima</b> do solo. Húmus = matéria orgânica <b>já decomposta</b>, misturada à terra.",
+ "🚨 <b>Não confunda PERMEÁVEL com IMPERMEABILIZADO.</b> Solo com vegetação é <b>permeável</b> (a água entra). Solo com asfalto é <b>impermeabilizado</b> (a água não entra → alagamento).",
+ "🚨 <b>Cuidado com a frase trocada:</b> quem é formado pela decomposição de restos de seres vivos é o material <b>ORGÂNICO</b> — não o inorgânico.",
+ "🚨 <b>Arenoso × argiloso na chuva:</b> o <b>arenoso</b> deixa a água passar depressa; o <b>argiloso</b> encharca, forma lama e, ao secar, racha.",
+ "🚨 <b>Plástico NÃO faz parte</b> da composição natural do solo. Fazem parte: areia, argila, silte e restos de seres vivos."
+];
+
+var RESUMO_RELAMPAGO = [
+ ["Qual é o grão mais fino do solo?","A <b>argila</b> — e ela forma barro quando é molhada."],
+ ["Como se sente um solo argiloso ao tato?","<b>Pegajoso</b> (gruda nos dedos)."],
+ ["O que a cor vermelha do solo indica?","Presença de <b>compostos de ferro</b> (minério de ferro)."],
+ ["Como se chamam os grandes depósitos de água subterrânea?","<b>Aquíferos</b>."],
+ ["O que é o húmus?","A matéria orgânica <b>decomposta</b>, rica em nutrientes, que deixa a terra escura e fofa."],
+ ["O que um solo precisa fornecer às plantas para ser fértil?","<b>Nutrientes, ar e água</b> — e para isso precisa estar estruturado (não compactado)."],
+ ["Qual é a rocha que deu origem ao solo?","A <b>rocha-mãe</b> (ou rocha-matriz)."],
+ ["Quais são os 4 agentes que desgastam a rocha?","<b>Chuva, Sol, vento e seres vivos</b> (como as raízes)."],
+ ["O que é a pecuária?","A atividade de <b>criação de animais</b>."],
+ ["O que é a urbanização?","Quando o espaço <b>rural ou natural se transforma em urbano</b>."],
+ ["O que é a voçoroca?","Os <b>grandes buracos</b> formados quando a erosão atinge áreas extensas."],
+ ["O que é o plantio direto?","Plantar <b>sobre o que restou</b> da plantação anterior, sem revolver o solo."],
+ ["Para que serve a rotação de cultura?","Para <b>evitar que os nutrientes do solo se esgotem</b>."],
+ ["Que planta é usada como adubo verde em meio à soja?","A <b>crotalária</b>."],
+ ["Quando é o Dia Mundial do Solo?","<b>5 de dezembro</b>, instituído pela FAO."]
+];
+
+/* ============== SIMULADO — 25 questões ============== */
+/* Cada questão: enunciado (q), alternativas (a) com a CERTA na posição 0 ao
+   escrever, índice da certa (c), e comentário de cada alternativa (fb).
+   As alternativas são EMBARALHADAS na tela por mulberry32, e a correta é
+   guardada pelo CONTEÚDO (não pela letra). */
+var SIM = [
+{q:"O solo é aquilo que, em linguagem popular, chamamos de terra. Sobre onde ele é encontrado, é correto afirmar que:",
+ a:["recobre toda a superfície do planeta, tanto nos ambientes terrestres quanto nos aquáticos",
+    "só existe nos lugares onde há plantações",
+    "só existe embaixo das florestas",
+    "só existe nos continentes, nunca embaixo da água"], c:0,
+ fb:["É o que diz o livro: o solo recobre toda a superfície do planeta.",
+     "O solo existe também onde ninguém planta nada.",
+     "A floresta tem solo, mas ele não está só ali.",
+     "Há solo também no fundo dos rios e do mar (ambientes aquáticos)."]},
+
+{q:"Todo solo é formado por uma parte mineral, uma parte orgânica e mais uma coisa. Qual?",
+ a:["Espaços vazios preenchidos por ar ou por água","Plástico e vidro bem triturados","Somente pedras grandes","Gelo"], c:0,
+ fb:["Correto! São os espaços (poros) ocupados por ar ou água.",
+     "Plástico e vidro são lixo, não fazem parte da composição natural do solo.",
+     "Fragmentos de rocha aparecem, mas o que falta citar são os espaços vazios.",
+     "O livro não cita gelo como componente do solo."]},
+
+{q:"Qual é a ordem CRESCENTE de tamanho dos grãos minerais do solo?",
+ a:["argila, silte, areia","areia, silte, argila","silte, argila, areia","argila, areia, silte"], c:0,
+ fb:["Correto: a argila é a menor e a areia é a maior.",
+     "Essa é a ordem decrescente (do maior para o menor).",
+     "O silte não é o menor: ele fica entre a argila e a areia.",
+     "A areia não fica no meio — ela é a maior dos três."]},
+
+{q:"Um solo molhado foi esfregado entre os dedos e a sensação foi ÁSPERA. Que tipo de solo é esse?",
+ a:["Arenoso","Argiloso","Siltoso","Orgânico"], c:0,
+ fb:["Correto, conforme o quadro da página 62: arenoso = áspera.",
+     "O argiloso é pegajoso (gruda nos dedos).",
+     "O siltoso é sedoso, macio como talco.",
+     "\"Orgânico\" não é um tipo de textura: é a parte do solo feita de restos de seres vivos."]},
+
+{q:"A textura do solo depende de:",
+ a:["da proporção entre os grãos de areia, silte e argila",
+    "da cor que o solo apresenta quando está seco",
+    "da quantidade de minhocas que vivem nele",
+    "da profundidade em que o poço foi cavado"], c:0,
+ fb:["Correto: textura depende da quantidade de grãos maiores e menores.",
+     "A cor é outra característica e depende dos minerais que formaram o solo.",
+     "As minhocas melhoram o solo, mas não determinam sua textura.",
+     "O poço não tem relação com a textura."]},
+
+{q:"Um agricultor observou que sua terra é bem escura. O que isso indica, segundo o livro?",
+ a:["Que há muita matéria orgânica, o que é importante para a agricultura",
+    "Que há muito minério de ferro",
+    "Que o solo é formado quase só de areia",
+    "Que o solo está impermeabilizado"], c:0,
+ fb:["Correto: solos bem escuros indicam muita matéria orgânica e costumam ser férteis.",
+     "O ferro deixa o solo avermelhado, não escuro.",
+     "A areia é clara e com brilho.",
+     "Impermeabilização é a cobertura por asfalto ou concreto — nada a ver com a cor."]},
+
+{q:"Na Amazônia existe a chamada Terra Preta de Índio. Como ela se originou?",
+ a:["Pela ação humana, principalmente pelo acúmulo de resíduos orgânicos e pelo uso do fogo",
+    "Pela erosão provocada pelo vento",
+    "Pela decomposição de minério de ferro",
+    "Pelo assoreamento de um grande rio"], c:0,
+ fb:["Correto, exatamente como o livro explica.",
+     "A erosão tira material do solo; não é a origem da Terra Preta.",
+     "O ferro produz solos avermelhados.",
+     "Assoreamento é o acúmulo de grãos dentro dos rios."]},
+
+{q:"O que é a PERMEABILIDADE do solo?",
+ a:["A característica de possibilitar que a água circule (infiltre) pelos espaços entre os grãos",
+    "A capacidade do solo de ficar duro quando pisoteado",
+    "A quantidade de matéria orgânica presente no solo",
+    "A cor que o solo tem depois da chuva"], c:0,
+ fb:["Correto, é a definição da página 65.",
+     "Ficar duro é compactação, o contrário de solo estruturado.",
+     "Isso tem a ver com o húmus, não com a permeabilidade.",
+     "Cor não tem relação com permeabilidade."]},
+
+{q:"Três garrafas foram montadas com solos diferentes e a mesma quantidade de água foi despejada em cada uma. Em qual delas a água passou em MAIOR quantidade?",
+ a:["Na do solo arenoso, porque os grãos maiores deixam mais espaços entre si",
+    "Na do solo argiloso, porque a argila absorve toda a água",
+    "Em todas igualmente, porque a quantidade de água era a mesma",
+    "Em nenhuma, porque a água nunca atravessa o solo"], c:0,
+ fb:["Correto: quanto maiores os grãos, maiores os espaços e mais permeável o solo.",
+     "A argila tem grãos pequenininhos e bem juntos: a água passa devagar.",
+     "A quantidade de água foi igual, mas a passagem dependeu do tipo de grão.",
+     "A água atravessa sim — é assim que se formam os lençóis subterrâneos."]},
+
+{q:"Depois de uma chuva forte, em qual solo é mais fácil aparecerem poças de água?",
+ a:["No argiloso, que é pouco permeável","No arenoso, que é muito permeável",
+    "Em nenhum, pois a água sempre infiltra","Só no solo da praia"], c:0,
+ fb:["Correto: por ser pouco permeável, ele encharca e forma poças.",
+     "No arenoso a água desce rápido, por isso quase não forma poça.",
+     "Nem sempre: depende do tipo de grão e de o solo estar ou não impermeabilizado.",
+     "O solo da praia é arenoso: a água desce depressa nele."]},
+
+{q:"A água da chuva que infiltra no solo pode voltar à superfície. Como se chama o lugar onde isso acontece?",
+ a:["Nascente","Voçoroca","Afloramento","Aquífero"], c:0,
+ fb:["Correto: a água das nascentes dá origem aos riachos, que formam os grandes rios.",
+     "Voçoroca é um grande buraco causado pela erosão.",
+     "Afloramento é rocha exposta na superfície.",
+     "Aquífero é o grande depósito de água subterrânea, não o ponto de saída."]},
+
+{q:"Sobre a água subterrânea, o livro afirma que:",
+ a:["grande parte da água adequada para o consumo humano é subterrânea",
+    "nenhuma água subterrânea serve para o consumo humano",
+    "a água subterrânea existe apenas em desertos",
+    "a água subterrânea não tem relação com os rios"], c:0,
+ fb:["Correto: e os grandes depósitos são chamados de aquíferos.",
+     "Ao contrário: grande parte da água que consumimos vem de baixo da terra.",
+     "Ela existe em muitos lugares, não só em desertos.",
+     "Tem sim: as nascentes alimentam riachos, que formam rios."]},
+
+{q:"Qual é a contribuição das bactérias e dos fungos para o solo?",
+ a:["Auxiliam na decomposição da matéria orgânica, liberando substâncias minerais para os vegetais",
+    "Cavam galerias que deixam o ar e a água entrarem",
+    "Formam a parte mineral do solo, como a areia",
+    "Deixam o solo compactado e duro"], c:0,
+ fb:["Correto: e as plantas absorvem essas substâncias pela raiz.",
+     "Quem cava galerias são as minhocas, formigas e outros animais.",
+     "A parte mineral vem do desgaste das rochas.",
+     "Eles não compactam o solo; a compactação vem de máquinas e do pisoteamento."]},
+
+{q:"As minhocas e as formigas ajudam o solo porque:",
+ a:["ao cavar galerias, permitem a entrada de ar e de água até as raízes das plantas",
+    "comem as bactérias e os fungos prejudiciais",
+    "produzem minério de ferro dentro do solo",
+    "impedem que a chuva infiltre no solo"], c:0,
+ fb:["Correto: e também fazem o revolvimento, misturando a matéria orgânica com os grãos.",
+     "Elas se alimentam de microrganismos e restos de plantas, mas o destaque do livro são as galerias.",
+     "O minério de ferro vem das rochas, não dos animais.",
+     "É justamente o contrário: as galerias ajudam a água a entrar."]},
+
+{q:"O que é o HÚMUS?",
+ a:["O material formado quando a matéria orgânica do solo se decompõe",
+    "Um grão mineral de tamanho intermediário",
+    "A camada de folhas que cobre o solo da floresta",
+    "A rocha que deu origem ao solo"], c:0,
+ fb:["Correto: deixa a terra escura, fofa, úmida e pegajosa e é rico em nutrientes.",
+     "Esse é o silte.",
+     "Essa é a serapilheira.",
+     "Essa é a rocha-mãe."]},
+
+{q:"Para que um solo seja FÉRTIL, ele precisa:",
+ a:["estar estruturado (não compactado) e fornecer às plantas nutrientes, ar e água",
+    "estar bem compactado, para segurar as raízes",
+    "ser formado só de areia",
+    "ser coberto por asfalto para não perder água"], c:0,
+ fb:["Correto: é a definição da página 71.",
+     "Compactado é justamente o oposto de estruturado.",
+     "O solo arenoso tem pouca matéria orgânica e é muito permeável.",
+     "Asfalto impermeabiliza e prejudica o solo."]},
+
+{q:"Os solos vêm sendo formados ao longo de milhares de anos, principalmente:",
+ a:["pelo desgaste de rochas provocado por chuvas, Sol, vento e seres vivos",
+    "pelo acúmulo de lixo deixado pelas pessoas",
+    "pela água que os rios trazem do mar",
+    "pela fabricação de terra pelas minhocas"], c:0,
+ fb:["Correto: as rochas são quebradas em pedaços cada vez menores.",
+     "Lixo é poluição, não formação de solo.",
+     "Os rios transportam material, mas a formação vem do desgaste das rochas.",
+     "As minhocas melhoram o solo, mas não o fabricam."]},
+
+{q:"O ditado \"Água mole em pedra dura, tanto bate até que fura\" foi usado no livro para explicar:",
+ a:["o desgaste das rochas que dá origem ao solo",
+    "o assoreamento dos rios","a impermeabilização das cidades","a rotação de cultura"], c:0,
+ fb:["Correto: as ondas do mar, batendo sempre, desgastam e até furam a rocha.",
+     "Assoreamento é o acúmulo de grãos dentro dos rios.",
+     "Impermeabilização é a cobertura do solo por asfalto e concreto.",
+     "Rotação de cultura é uma técnica de plantio."]},
+
+{q:"Na ilustração de um solo recém-formado, em qual parte encontramos a MAIOR quantidade de matéria orgânica?",
+ a:["Na camada mais superficial, que é a mais escura",
+    "Na rocha-mãe, lá embaixo","Na camada mais avermelhada, mais profunda",
+    "Em nenhuma: matéria orgânica fica fora do solo"], c:0,
+ fb:["Correto: é onde ficam os restos de seres vivos e o húmus.",
+     "A rocha-mãe é mineral, está no fundo e ainda vai se desgastar.",
+     "A camada avermelhada indica compostos de ferro, não matéria orgânica.",
+     "A matéria orgânica faz parte do solo: é uma das suas duas partes."]},
+
+{q:"A agricultura intensiva busca grande produtividade no menor tempo possível. Qual destas consequências o livro cita?",
+ a:["Desmatamento de áreas de floresta e compactação do solo por máquinas pesadas",
+    "Aumento da serapilheira nas plantações",
+    "Formação natural de novos aquíferos",
+    "Redução do uso de adubos químicos"], c:0,
+ fb:["Correto: e também o uso de adubos químicos e defensivos agrícolas.",
+     "A serapilheira é típica de florestas, não de plantações intensivas.",
+     "Os aquíferos se formam pela infiltração ao longo de muito tempo.",
+     "Ao contrário: a agricultura intensiva usa muitos adubos químicos."]},
+
+{q:"Qual é a diferença entre agricultura e pecuária?",
+ a:["Agricultura é o cultivo de plantas; pecuária é a criação de animais",
+    "Agricultura é a criação de animais; pecuária é o cultivo de plantas",
+    "As duas são a retirada de minerais do solo",
+    "As duas são formas de urbanização"], c:0,
+ fb:["Correto: e da pecuária se obtêm carne, couro, lã, leite e ovos.",
+     "Está trocado: quem cria animais é a pecuária.",
+     "Retirar minerais é a mineração.",
+     "Urbanização é o espaço rural virando urbano."]},
+
+{q:"O processo em que o espaço antes rural ou natural se transforma em espaço urbano chama-se:",
+ a:["urbanização","mineração","assoreamento","adubação verde"], c:0,
+ fb:["Correto: surgem moradias, escolas, hospitais, comércio, indústrias e ruas asfaltadas.",
+     "Mineração é a retirada de minerais do solo.",
+     "Assoreamento é o acúmulo de grãos nos rios.",
+     "Adubação verde é uma técnica de conservação do solo."]},
+
+{q:"Uma encosta foi desmatada e, com as chuvas, o solo foi perdendo seus grãos até se formarem grandes buracos. Esse fenômeno chama-se:",
+ a:["voçoroca","assoreamento","infiltração","agrofloresta"], c:0,
+ fb:["Correto: a voçoroca aparece quando a erosão atinge extensas áreas.",
+     "Assoreamento é quando esses grãos chegam a rios e lagos e se acumulam lá.",
+     "Infiltração é a água entrando no solo.",
+     "Agrofloresta é uma técnica que protege o solo."]},
+
+{q:"Numa cidade, muitas ruas foram asfaltadas e praças foram cimentadas. Qual problema isso costuma causar quando chove forte?",
+ a:["Alagamentos e enchentes, porque a água não consegue infiltrar",
+    "Formação de voçorocas dentro das casas",
+    "Aumento da fertilidade do solo",
+    "Aparecimento de nascentes no meio da rua"], c:0,
+ fb:["Correto: é a impermeabilização do solo.",
+     "Voçorocas se formam pela erosão em áreas extensas de solo exposto.",
+     "O asfalto não torna o solo fértil — ele o isola.",
+     "As nascentes dependem de o solo estar permeável para a água infiltrar."]},
+
+{q:"Assinale a alternativa que apresenta SOMENTE práticas que conservam o solo:",
+ a:["plantio direto, adubação verde e sistema agroflorestal",
+    "mineração, urbanização e pecuária intensiva",
+    "plantio direto, mineração e impermeabilização",
+    "adubação verde, agricultura intensiva e asfaltamento"], c:0,
+ fb:["Correto: as três mantêm o solo coberto e estruturado.",
+     "As três estão entre as atividades que degradam o solo.",
+     "Plantio direto conserva, mas mineração e impermeabilização degradam.",
+     "Adubação verde conserva, mas agricultura intensiva e asfaltamento degradam."]}
+];
+/* =====================================================================
+   APLICAÇÃO — trilha com cadeados, render e relatório
+   ===================================================================== */
+(function(){
+"use strict";
+
+/* ---------- armazenamento seguro ---------- */
+var memoria = {};
+function ler(k){
+  try{ var v = localStorage.getItem(k); return v ? JSON.parse(v) : null; }
+  catch(e){ return memoria[k] ? JSON.parse(memoria[k]) : null; }
+}
+function gravar(k,o){
+  var s = JSON.stringify(o);
+  try{ localStorage.setItem(k,s); }catch(e){ memoria[k]=s; }
+  memoria[k]=s;
+  marcaSalvo();
+}
+function apagarTudo(){
+  CHAVES.forEach(function(k){ try{ localStorage.removeItem(k); }catch(e){} delete memoria[k]; });
+}
+
+var K = {
+  leitura: SLUG+"_leitura_v1",
+  mapa:    SLUG+"_mapa_v1",
+  vf:      SLUG+"_vf_v1",
+  resumo:  SLUG+"_resumo_v1",
+  simulado:SLUG+"_sim_v1",
+  trilha:  SLUG+"_trilha_v1"
+};
+var CHAVES = Object.keys(K).map(function(x){return K[x];});
+
+var ETAPAS = [
+  {id:"leitura",  icone:"📖", nome:"Leitura Guiada",     painel:"p-leitura"},
+  {id:"mapa",     icone:"🧠", nome:"Mapa das Galerias",  painel:"p-mapa"},
+  {id:"vf",       icone:"✅", nome:"Verdade na Terra?",  painel:"p-vf"},
+  {id:"resumo",   icone:"🗺️", nome:"Caderninho da Mina", painel:"p-resumo"},
+  {id:"simulado", icone:"📝", nome:"A Grande Escavação", painel:"p-simulado"}
+];
+
+/* ---------- estados ---------- */
+var S = {};
+function carregar(){
+  S.leitura  = ler(K.leitura)  || {blocos:{}, concluido:false, concluidoEm:null};
+  S.mapa     = ler(K.mapa)     || {lac:{}, concluido:false, concluidoEm:null};
+  S.vf       = ler(K.vf)       || {melhor:0, rodadas:0, concluido:false, concluidoEm:null};
+  S.resumo   = ler(K.resumo)   || {rolagem:0, concluido:false, concluidoEm:null};
+  S.simulado = ler(K.simulado) || {resp:{}, enviado:false, acertos:null, codigo:null, concluido:false, concluidoEm:null};
+  S.trilha   = ler(K.trilha)   || {liberadoPelosPais:false, liberadoEm:null};
+}
+function salvar(id){ gravar(K[id], S[id]); }
+function agora(){ return new Date().toISOString(); }
+function concluir(id){
+  if(S[id].concluido) return;
+  S[id].concluido = true; S[id].concluidoEm = agora();
+  salvar(id); montarAbas(); atualizarBarra();
+}
+function fmtData(iso){
+  if(!iso) return "—";
+  var d = new Date(iso);
+  return ("0"+d.getDate()).slice(-2)+"/"+("0"+(d.getMonth()+1)).slice(-2)+"/"+d.getFullYear()+
+         " às "+("0"+d.getHours()).slice(-2)+":"+("0"+d.getMinutes()).slice(-2);
+}
+
+/* ---------- trilha ---------- */
+var TOTAL_GAL = LEITURA.length;
+var TOTAL_LAC = MAPA.reduce(function(s,r){ return s + r.itens.filter(function(i){return i.t==="lacuna";}).length; },0);
+
+function galeriasFeitas(){
+  var n=0;
+  for(var i=0;i<TOTAL_GAL;i++){ var b=S.leitura.blocos[i]; if(b && b.ok) n++; }
+  return n;
+}
+function lacunasFeitas(){
+  var n=0;
+  for(var k in S.mapa.lac){ if(S.mapa.lac[k] && S.mapa.lac[k].ok) n++; }
+  return n;
+}
+function liberado(){ return S.trilha.liberadoPelosPais === true; }
+
+function destravada(id){
+  if(liberado()) return true;
+  var i = ETAPAS.map(function(e){return e.id;}).indexOf(id);
+  if(i<=0) return true;
+  if(S[id].concluido) return true;
+  return S[ETAPAS[i-1].id].concluido === true;
+}
+function fraseCadeado(id){
+  switch(id){
+    case "mapa":
+      return "Destrava quando você concluir as "+TOTAL_GAL+" galerias da Leitura Guiada (faltam "+
+             (TOTAL_GAL - galeriasFeitas())+").";
+    case "vf":
+      return "Destrava quando você encaixar as "+TOTAL_LAC+" peças do Mapa das Galerias (faltam "+
+             (TOTAL_LAC - lacunasFeitas())+").";
+    case "resumo":
+      return "Destrava quando você jogar uma rodada inteira do Verdade na Terra? (as 12 frases até o fim).";
+    case "simulado":
+      return "Destrava quando você clicar em \"✅ Li o resumo até o fim\", no pé do Caderninho da Mina.";
+  }
+  return "Ainda está trancado.";
+}
+
+/* ---------- abas ---------- */
+var abaAtual = "leitura";
+var destravadasAntes = {};
+var ultimoRenderTrancado = {};
+function renderPainel(id){
+  if(id==="leitura")  return renderLeitura();
+  if(id==="mapa")     return renderMapa();
+  if(id==="vf")       return renderVF();
+  if(id==="resumo")   return renderResumo();
+  if(id==="simulado") return renderSimulado();
+}
+function montarAbas(){
+  var nav = document.getElementById("abas");
+  nav.innerHTML = "";
+  ETAPAS.forEach(function(e){
+    var b = document.createElement("button");
+    var ok = destravada(e.id);
+    b.innerHTML = (ok ? e.icone : "🔒") + " " + e.nome;
+    if(e.id===abaAtual) b.className = "ativa";
+    if(!ok){ b.className += " trancada"; }
+    if(S[e.id].concluido) b.className += " concluida";
+    if(ok && destravadasAntes[e.id]===false && !S[e.id].concluido){ b.className += " novo"; }
+    destravadasAntes[e.id] = ok;
+    b.onclick = function(){ irPara(e.id); };
+    nav.appendChild(b);
+  });
+}
+function irPara(id){
+  if(!destravada(id)){
+    modal("🔒 Esta etapa ainda está trancada",
+          "<p>"+fraseCadeado(id)+"</p>",
+          [{txt:"Entendi!", cls:""}]);
+    return;
+  }
+  abaAtual = id;
+  ETAPAS.forEach(function(e){
+    document.getElementById(e.painel).className = "painel" + (e.id===id ? " ativo" : "");
+  });
+  /* se o painel foi desenhado trancado (ou ainda está trancado), redesenha:
+     assim o conteúdo aparece ao destravar e a contagem do cadeado fica atual */
+  if(ultimoRenderTrancado[id] || !destravada(id)) renderPainel(id);
+  montarAbas(); atualizarBarra();
+  window.scrollTo({top:0, behavior:"smooth"});
+  if(id==="resumo") setTimeout(checarRolagem, 400);
+}
+
+/* ---------- barra geral ---------- */
+function atualizarBarra(){
+  var feitas = ETAPAS.filter(function(e){return S[e.id].concluido;}).length;
+  var pct = Math.round(feitas/ETAPAS.length*100);
+  document.getElementById("barraGeral").style.width = pct+"%";
+  var txt;
+  if(feitas===0) txt = "🪱 A Mina está pronta para cavar!";
+  else if(feitas===ETAPAS.length) txt = "🏆 Você percorreu todas as galerias! Tudo liberado para revisar.";
+  else txt = "🪱 "+feitas+" de "+ETAPAS.length+" etapas concluídas ("+pct+"%).";
+  document.getElementById("txtGeral").textContent = txt;
+  var at = ETAPAS.filter(function(e){return e.id===abaAtual;})[0];
+  var det = "";
+  if(abaAtual==="leitura") det = "Galerias: "+galeriasFeitas()+" de "+TOTAL_GAL;
+  if(abaAtual==="mapa")    det = "🧩 Mapa: "+lacunasFeitas()+" de "+TOTAL_LAC+" peças encaixadas";
+  if(abaAtual==="vf" && S.vf.rodadas) det = "⭐ Melhor placar: "+S.vf.melhor+" de 12";
+  if(abaAtual==="resumo")  det = "Lido: "+S.resumo.rolagem+"%";
+  if(abaAtual==="simulado" && S.simulado.enviado) det = "Nota: "+S.simulado.acertos+" de "+SIM.length;
+  document.getElementById("txtEtapa").textContent = det || (at ? at.icone+" "+at.nome : "");
+  if(liberado()) document.getElementById("txtEtapa").textContent = (det? det+" · ":"")+"🔓 Trilha liberada";
+}
+
+/* ---------- modal ---------- */
+function modal(titulo, html, botoes){
+  var cx = document.getElementById("modalCaixa");
+  cx.innerHTML = "<h3>"+titulo+"</h3>"+html+"<div id='modalBtns'></div>";
+  var box = cx.querySelector("#modalBtns");
+  (botoes||[{txt:"Fechar"}]).forEach(function(b){
+    var el = document.createElement("button");
+    el.textContent = b.txt; if(b.cls) el.className = b.cls;
+    el.onclick = function(){ fecharModal(); if(b.fn) b.fn(); };
+    box.appendChild(el);
+  });
+  document.getElementById("modalFundo").classList.add("ver");
+}
+function fecharModal(){ document.getElementById("modalFundo").classList.remove("ver"); }
+document.getElementById("modalFundo").addEventListener("click", function(ev){
+  if(ev.target.id==="modalFundo") fecharModal();
+});
+
+/* ---------- embaralhador com semente (mulberry32) ---------- */
+function mulberry32(a){
+  return function(){
+    a |= 0; a = a + 0x6D2B79F5 | 0;
+    var t = Math.imul(a ^ a >>> 15, 1 | a);
+    t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+    return ((t ^ t >>> 14) >>> 0) / 4294967296;
+  };
+}
+function embaralhar(arr, semente){
+  var r = mulberry32(semente), a = arr.slice();
+  for(var i=a.length-1;i>0;i--){ var j = Math.floor(r()*(i+1)); var t=a[i]; a[i]=a[j]; a[j]=t; }
+  return a;
+}
+
+/* =====================================================================
+   1) LEITURA GUIADA
+   ===================================================================== */
+function renderLeitura(){
+  ultimoRenderTrancado.leitura = false;
+  var wrap = document.getElementById("galerias");
+  wrap.innerHTML = "";
+  LEITURA.forEach(function(g, idx){
+    var est = S.leitura.blocos[idx] || {resp:{}, ok:false};
+    var liberadaGal = idx===0 || (S.leitura.blocos[idx-1] && S.leitura.blocos[idx-1].ok) || liberado() || S.leitura.concluido;
+
+    var div = document.createElement("div");
+    div.className = "galeria" + (est.ok ? " feita" : "") + (liberadaGal ? "" : " bloqueada");
+    div.id = "gal"+idx;
+
+    var cab = document.createElement("div");
+    cab.className = "cabeca";
+    cab.innerHTML = "<span class='num'>"+(liberadaGal ? (est.ok ? "✅" : idx+1) : "🔒")+"</span>"+
+      "<span class='nome'>"+g.n+" — "+g.nome+"<span class='pag'>"+g.pag+"</span></span>"+
+      "<span class='seta'>"+(liberadaGal?"▾":"🔒")+"</span>";
+    cab.onclick = function(){
+      if(!liberadaGal){
+        modal("🔒 Galeria trancada",
+          "<p>A Mina ainda não cavou até aqui! Termine a <b>"+LEITURA[idx-1].n+"</b> para esta galeria se abrir.</p>",
+          [{txt:"Voltar"}]);
+        return;
+      }
+      div.classList.toggle("aberta");
+    };
+    div.appendChild(cab);
+
+    var corpo = document.createElement("div");
+    corpo.className = "corpo";
+    corpo.innerHTML = "<div class='texto'>"+g.texto+"</div>";
+
+    g.qs.forEach(function(q, qi){
+      var pd = document.createElement("div");
+      pd.className = "pergunta";
+      pd.innerHTML = "<p class='enunciado'>"+(qi+1)+". "+q.q+"</p>";
+      var fb = document.createElement("div"); fb.className = "feedback";
+      var ordem = embaralhar(q.a.map(function(t,i){return i;}), (idx+1)*1000 + qi*37 + 7);
+
+      ordem.forEach(function(origIdx){
+        var bt = document.createElement("button");
+        bt.className = "alt";
+        bt.innerHTML = q.a[origIdx];
+        bt.onclick = function(){
+          if(est.resp[qi]!==undefined) return;
+          est.resp[qi] = origIdx;
+          if(!est.primeira) est.primeira = {};
+          est.primeira[qi] = (origIdx===q.c);
+          pd.querySelectorAll(".alt").forEach(function(x){ x.disabled = true; });
+          bt.classList.add(origIdx===q.c ? "certa" : "errada");
+          if(origIdx!==q.c){
+            pd.querySelectorAll(".alt").forEach(function(x){
+              if(x.innerHTML===q.a[q.c]) x.classList.add("certa");
+            });
+          }
+          fb.className = "feedback " + (origIdx===q.c ? "ok" : "nao");
+          fb.innerHTML = (origIdx===q.c ? "🎉 <b>Isso aí!</b> " : "🤔 <b>Quase!</b> ") + q.fb[origIdx];
+          S.leitura.blocos[idx] = est;
+          verificaGaleria(idx, est, g, div);
+        };
+        if(est.resp[qi]!==undefined){
+          bt.disabled = true;
+          if(origIdx===est.resp[qi]) bt.classList.add(est.resp[qi]===q.c ? "certa":"errada");
+          if(origIdx===q.c) bt.classList.add("certa");
+        }
+        pd.appendChild(bt);
+      });
+      if(est.resp[qi]!==undefined){
+        var r = est.resp[qi];
+        fb.className = "feedback " + (r===q.c ? "ok":"nao");
+        fb.innerHTML = (r===q.c ? "🎉 <b>Isso aí!</b> " : "🤔 <b>Quase!</b> ") + q.fb[r];
+      }
+      pd.appendChild(fb);
+      corpo.appendChild(pd);
+    });
+
+    var aviso = document.createElement("div");
+    aviso.className = "pe-material"; aviso.id = "pe"+idx;
+    corpo.appendChild(aviso);
+    div.appendChild(corpo);
+    wrap.appendChild(div);
+
+    if(est.ok) pintarPe(idx, g);
+    if(liberadaGal && !est.ok && idx===galeriasFeitas()) div.classList.add("aberta");
+  });
+  pintarFimLeitura();
+}
+
+function verificaGaleria(idx, est, g, div){
+  var todas = g.qs.every(function(_,i){ return est.resp[i]!==undefined; });
+  if(todas && !est.ok){
+    est.ok = true; est.quando = agora();
+    S.leitura.blocos[idx] = est;
+    div.classList.add("feita");
+    div.querySelector(".cabeca .num").textContent = "✅";
+    pintarPe(idx, g);
+    salvar("leitura");
+    renderLeituraDestrava(idx);
+    if(galeriasFeitas()===TOTAL_GAL) concluirLeitura();
+  }else{
+    S.leitura.blocos[idx] = est;
+    salvar("leitura");
+  }
+  atualizarBarra();
+}
+function pintarPe(idx, g){
+  var el = document.getElementById("pe"+idx); if(!el) return;
+  if(idx < LEITURA.length-1){
+    el.innerHTML = "<p style='margin:6px 0 0'>🪱 <b>Galeria concluída!</b> A Mina já cavou até a próxima.</p>";
+    var b = document.createElement("button"); b.className="btn-prox";
+    b.textContent = "➡️ Ir para a "+LEITURA[idx+1].n;
+    b.onclick = function(){
+      var alvo = document.getElementById("gal"+(idx+1));
+      document.getElementById("gal"+idx).classList.remove("aberta");
+      alvo.classList.add("aberta");
+      alvo.scrollIntoView({behavior:"smooth", block:"start"});
+    };
+    el.appendChild(b);
+  }else{
+    el.innerHTML = "<p style='margin:6px 0 0'>🏆 <b>Você terminou todas as galerias!</b></p>";
+  }
+}
+function renderLeituraDestrava(idx){
+  var prox = document.getElementById("gal"+(idx+1));
+  if(!prox) return;
+  prox.classList.remove("bloqueada");
+  var cab = prox.querySelector(".cabeca");
+  cab.querySelector(".num").textContent = (idx+2);
+  cab.querySelector(".seta").textContent = "▾";
+  var g2 = LEITURA[idx+1];
+  var novoCab = cab.cloneNode(true);
+  cab.parentNode.replaceChild(novoCab, cab);
+  novoCab.onclick = function(){ prox.classList.toggle("aberta"); };
+}
+function concluirLeitura(){
+  concluir("leitura");
+  pintarFimLeitura();
+  modal("🏆 Leitura Guiada concluída!",
+    "<p>Você percorreu as <b>"+TOTAL_GAL+" galerias</b> da Mina! 🪱</p>"+
+    "<p>Agora o <b>🧠 Mapa das Galerias</b> está destravado — é hora de organizar tudo o que você leu.</p>",
+    [{txt:"Ir para o Mapa 🧠", fn:function(){ irPara("mapa"); }},{txt:"Ficar aqui", cls:"cinza"}]);
+}
+function pintarFimLeitura(){
+  var el = document.getElementById("fimLeitura");
+  if(!S.leitura.concluido){ el.innerHTML = ""; return; }
+  el.innerHTML = "<div class='pe-material'><p>🏆 <b>Leitura Guiada concluída!</b> Próxima parada: o Mapa das Galerias.</p></div>";
+  var b = document.createElement("button"); b.className="btn-prox";
+  b.textContent = "🧠 Ir para o Mapa das Galerias";
+  b.onclick = function(){ irPara("mapa"); };
+  el.querySelector(".pe-material").appendChild(b);
+}
+
+/* =====================================================================
+   2) MAPA MENTAL PARA ENCAIXAR
+   ===================================================================== */
+function renderMapa(){
+  var wrap = document.getElementById("mapaWrap");
+  ultimoRenderTrancado.mapa = !destravada("mapa");
+  if(!destravada("mapa")){ wrap.innerHTML = htmlCadeado("mapa"); ligarVoltar(wrap); return; }
+  wrap.innerHTML =
+    "<div class='contador-mapa' id='contMapa'></div>"+
+    "<div class='mapa-area' id='mapaArea'><div class='no-central'>🪱 O SOLO</div><div id='ramos'></div></div>"+
+    "<div class='mapa-completo' id='mapaFim'></div>";
+  var ramos = document.getElementById("ramos");
+
+  MAPA.forEach(function(r, ri){
+    var d = document.createElement("div");
+    d.className = "ramo"; d.style.borderLeftColor = r.cor;
+    d.innerHTML = "<h4 style='color:"+r.cor+"'>"+r.titulo+"</h4>";
+    var it = document.createElement("div"); it.className = "itens";
+    r.itens.forEach(function(item, ii){
+      if(item.t==="fixo"){
+        var f = document.createElement("span"); f.className="fixo"; f.innerHTML = item.txt;
+        it.appendChild(f);
+      }else{
+        var est = S.mapa.lac[item.id] || null;
+        var lc = document.createElement("span"); lc.className = "lacuna";
+        if(est && est.ok){
+          lc.classList.add("ok");
+          lc.innerHTML = "<span class='pergunta-mini'>"+item.dica+"</span><span class='preenchida'>🧩 "+item.certa+"</span>";
+        }else{
+          lc.innerHTML = "<span class='pergunta-mini'>"+item.dica+"</span>";
+          var ops = document.createElement("span"); ops.className="ops";
+          var par = embaralhar([item.certa, item.outra], (ri+1)*91 + ii*13);
+          par.forEach(function(txt){
+            var b = document.createElement("button"); b.textContent = txt;
+            b.onclick = function(){
+              var e2 = S.mapa.lac[item.id] || {tentativas:0, ok:false, primeira:false};
+              e2.tentativas++;
+              if(txt===item.certa){
+                e2.ok = true;
+                e2.primeira = (e2.tentativas===1);
+                S.mapa.lac[item.id] = e2; salvar("mapa");
+                lc.classList.add("ok");
+                lc.innerHTML = "<span class='pergunta-mini'>"+item.dica+"</span><span class='preenchida'>🧩 "+item.certa+"</span>";
+                atualizaContadorMapa();
+              }else{
+                S.mapa.lac[item.id] = e2; salvar("mapa");
+                b.classList.add("err");
+                setTimeout(function(){ b.classList.remove("err"); }, 500);
+              }
+            };
+            ops.appendChild(b);
+          });
+          lc.appendChild(ops);
+        }
+        it.appendChild(lc);
+      }
+    });
+    d.appendChild(it);
+    ramos.appendChild(d);
+  });
+  atualizaContadorMapa();
+}
+function atualizaContadorMapa(){
+  var n = lacunasFeitas();
+  var c = document.getElementById("contMapa"); if(!c) return;
+  c.textContent = "🧩 Mapa: "+n+" de "+TOTAL_LAC+" peças encaixadas";
+  atualizarBarra();
+  if(n===TOTAL_LAC){
+    document.getElementById("mapaArea").classList.add("completo");
+    var fim = document.getElementById("mapaFim");
+    fim.className = "mapa-completo ver";
+    fim.innerHTML = "<h3 style='margin:0 0 8px;color:#2E7D32'>🧠 Mapa completo!</h3>"+
+      "<p>Você montou o mapa inteiro do solo, peça por peça. Agora o jogo <b>✅ Verdade na Terra?</b> está destravado!</p>";
+    var b = document.createElement("button"); b.className="btn-prox";
+    b.textContent = "✅ Jogar Verdade na Terra?";
+    b.onclick = function(){ irPara("vf"); };
+    fim.appendChild(b);
+    if(!S.mapa.concluido){
+      concluir("mapa");
+      modal("🧠 Mapa completo!","<p>Todas as <b>"+TOTAL_LAC+" peças</b> encaixadas! O jogo <b>Verdade na Terra?</b> está liberado.</p>",
+        [{txt:"Jogar agora ✅", fn:function(){ irPara("vf"); }},{txt:"Ficar aqui", cls:"cinza"}]);
+    }
+  }
+}
+
+/* =====================================================================
+   3) VERDADEIRO OU FALSO
+   ===================================================================== */
+var vfEstado = null;
+function renderVF(){
+  var wrap = document.getElementById("vfWrap");
+  ultimoRenderTrancado.vf = !destravada("vf");
+  if(!destravada("vf")){ wrap.innerHTML = htmlCadeado("vf"); ligarVoltar(wrap); return; }
+  wrap.innerHTML =
+    "<div class='vf-card' id='vfCard'>"+
+      "<div class='barra-fundo'><div class='barra-fill' id='vfBarra'></div></div>"+
+      "<p style='margin:10px 0 0;font-size:.92rem'><b id='vfPos'></b> · <span class='estrelas' id='vfEstrelas'></span></p>"+
+      "<div class='vf-frase' id='vfFrase'></div>"+
+      "<div class='vf-botoes'><button class='btn-v' id='btnV'>✔️ VERDADEIRO</button><button class='btn-f' id='btnF'>✖️ FALSO</button></div>"+
+      "<div class='vf-expl' id='vfExpl'></div>"+
+    "</div>"+
+    "<div class='vf-final' id='vfFinal'></div>";
+  if(S.vf.rodadas>0){
+    var p = document.createElement("p");
+    p.style.cssText="text-align:center;margin:12px 0 0;font-weight:bold";
+    p.innerHTML = "⭐ Seu melhor placar até agora: <b>"+S.vf.melhor+" de 12</b> ("+S.vf.rodadas+" rodada(s) jogada(s)).";
+    wrap.appendChild(p);
+  }
+  novaRodadaVF();
+}
+function novaRodadaVF(){
+  vfEstado = {lista: embaralhar(VF, Date.now()%100000).slice(0,12), i:0, acertos:0};
+  document.getElementById("vfCard").style.display = "block";
+  document.getElementById("vfFinal").className = "vf-final";
+  mostrarFraseVF();
+}
+function mostrarFraseVF(){
+  var e = vfEstado, f = e.lista[e.i];
+  document.getElementById("vfPos").textContent = "Frase "+(e.i+1)+" de 12";
+  document.getElementById("vfEstrelas").textContent = "⭐".repeat(e.acertos);
+  document.getElementById("vfBarra").style.width = Math.round(e.i/12*100)+"%";
+  document.getElementById("vfFrase").textContent = "🪱 “"+f.f+"”";
+  document.getElementById("vfExpl").className = "vf-expl";
+  var bv = document.getElementById("btnV"), bf = document.getElementById("btnF");
+  bv.disabled = false; bf.disabled = false; bv.style.opacity=1; bf.style.opacity=1;
+  bv.onclick = function(){ respVF(true); };
+  bf.onclick = function(){ respVF(false); };
+}
+function respVF(r){
+  var e = vfEstado, f = e.lista[e.i];
+  var certo = (r===f.v);
+  if(certo) e.acertos++;
+  var ex = document.getElementById("vfExpl");
+  ex.className = "vf-expl ver";
+  ex.style.background = certo ? "#E4F7E5" : "#FFD9D6";
+  ex.style.borderLeft = "6px solid "+(certo ? "#4CAF50" : "#E2483D");
+  ex.innerHTML = "<b>"+(certo ? "🎉 Acertou!" : "🤔 Quase!")+"</b> "+f.e;
+  document.getElementById("btnV").disabled = true;
+  document.getElementById("btnF").disabled = true;
+  document.getElementById("vfEstrelas").textContent = "⭐".repeat(e.acertos);
+  var b = document.createElement("button");
+  b.className = "btn-prox";
+  b.textContent = (e.i===11 ? "🏁 Ver meu resultado" : "➡️ Próxima frase");
+  b.onclick = function(){
+    e.i++;
+    if(e.i>=12) fimVF(); else mostrarFraseVF();
+  };
+  ex.appendChild(b);
+}
+function fimVF(){
+  var e = vfEstado;
+  S.vf.rodadas++;
+  if(e.acertos > S.vf.melhor) S.vf.melhor = e.acertos;
+  salvar("vf");
+  document.getElementById("vfCard").style.display = "none";
+  var fim = document.getElementById("vfFinal");
+  fim.className = "vf-final ver";
+  var pct = Math.round(e.acertos/12*100);
+  var msg = pct>=90 ? "Incrível! A Mina está impressionada! 🪱✨" :
+            pct>=70 ? "Muito bem! Você sabe bastante sobre o solo!" :
+            pct>=50 ? "Bom trabalho! Dá uma olhada no Caderninho e jogue de novo." :
+                      "Não desanime! Revise no Caderninho da Mina e tente outra vez.";
+  fim.innerHTML = "<div class='trofeu'>"+(pct>=70?"🏆":"🪱")+"</div>"+
+    "<h3 style='margin:6px 0'>Você acertou "+e.acertos+" de 12 ("+pct+"%)</h3>"+
+    "<p class='estrelas'>"+"⭐".repeat(e.acertos)+"</p>"+
+    "<p>"+msg+"</p>"+
+    "<p style='font-size:.9rem;opacity:.8'>⭐ Melhor placar: <b>"+S.vf.melhor+" de 12</b></p>";
+  var b1 = document.createElement("button"); b1.className="btn-sec btn-sol";
+  b1.textContent = "🔁 Jogar de novo"; b1.onclick = novaRodadaVF;
+  var b2 = document.createElement("button"); b2.className="btn-prox";
+  b2.textContent = "🗺️ Agora revise no Resumo!"; b2.onclick = function(){ irPara("resumo"); };
+  fim.appendChild(b1); fim.appendChild(document.createElement("br")); fim.appendChild(b2);
+  if(!S.vf.concluido){
+    concluir("vf");
+    setTimeout(function(){
+      modal("✅ Rodada completa!",
+        "<p>Você jogou as 12 frases! O <b>🗺️ Caderninho da Mina</b> (resumo) está destravado.</p>"+
+        "<p>Pode jogar quantas vezes quiser para melhorar o placar. 🪱</p>",
+        [{txt:"Ir para o Resumo 🗺️", fn:function(){ irPara("resumo"); }},{txt:"Jogar de novo", cls:"cinza", fn:novaRodadaVF}]);
+    }, 500);
+  }
+}
+
+/* =====================================================================
+   4) RESUMO
+   ===================================================================== */
+function renderResumo(){
+  var wrap = document.getElementById("resumoWrap");
+  ultimoRenderTrancado.resumo = !destravada("resumo");
+  if(!destravada("resumo")){ wrap.innerHTML = htmlCadeado("resumo"); ligarVoltar(wrap); return; }
+  var h = "";
+
+  h += "<h3 style='color:#6B4226;margin-top:24px'>⏳ A história do solo, em 6 passos</h3><div class='linha-tempo'>";
+  RESUMO_TEMPO.forEach(function(t){
+    h += "<div class='lt-item'><b>"+t.t+"</b><br>"+t.d+"</div>";
+  });
+  h += "</div>";
+
+  h += "<h3 style='color:#6B4226;margin-top:28px'>📒 Todas as palavras importantes</h3><div class='grade'>";
+  RESUMO_PALAVRAS.forEach(function(p){
+    h += "<div class='palavra'><b>"+p[0]+"</b>"+p[1]+"</div>";
+  });
+  h += "</div>";
+
+  h += "<h3 style='color:#6B4226;margin-top:28px'>💛 Dicas de prova</h3>";
+  RESUMO_DICAS.forEach(function(d){ h += "<div class='postit'>"+d+"</div>"; });
+
+  h += "<h3 style='color:#6B4226;margin-top:28px'>🚨 Pegadinhas — cuidado com estas!</h3>";
+  RESUMO_ALERTAS.forEach(function(a){ h += "<div class='alerta'>"+a+"</div>"; });
+
+  h += "<h3 style='color:#6B4226;margin-top:28px'>⚡ Quiz relâmpago — clique para ver a resposta</h3>";
+  RESUMO_RELAMPAGO.forEach(function(r,i){
+    h += "<div class='relampago' data-i='"+i+"'><div class='q'>❓ "+r[0]+"</div><div class='r'>💡 "+r[1]+"</div></div>";
+  });
+
+  h += "<div class='pe-material' id='peResumo'></div>";
+  wrap.innerHTML = h;
+
+  wrap.querySelectorAll(".relampago .q").forEach(function(q){
+    q.onclick = function(){ q.parentNode.classList.toggle("ab"); };
+  });
+  pintarPeResumo();
+  setTimeout(checarRolagem, 300);
+}
+function pintarPeResumo(){
+  var el = document.getElementById("peResumo"); if(!el) return;
+  if(S.resumo.concluido){
+    el.innerHTML = "<p>✅ <b>Resumo lido até o fim!</b> Agora é a hora da verdade.</p>";
+    var b = document.createElement("button"); b.className="btn-prox";
+    b.textContent = "📝 Pronto para o Simulado!";
+    b.onclick = function(){ irPara("simulado"); };
+    el.appendChild(b);
+  }else{
+    el.innerHTML = "<p id='avisoRol' style='font-size:.92rem;opacity:.85'>Role a página até o fim para liberar o botão. (Lido: <b id='pctRol'>"+S.resumo.rolagem+"%</b>)</p>";
+    var b = document.createElement("button"); b.className="btn-prox"; b.id="btnLiResumo";
+    b.textContent = "✅ Li o resumo até o fim";
+    b.disabled = S.resumo.rolagem < 90;
+    b.onclick = function(){
+      concluir("resumo");
+      pintarPeResumo();
+      modal("🗺️ Resumo concluído!",
+        "<p>Boa! Agora o <b>📝 A Grande Escavação</b> (simulado) está destravado.</p>"+
+        "<p>São 25 perguntas. Respire fundo — você estudou tudo! 🪱</p>",
+        [{txt:"Ir para o Simulado 📝", fn:function(){ irPara("simulado"); }},{txt:"Ficar aqui", cls:"cinza"}]);
+    };
+    el.appendChild(b);
+  }
+}
+function checarRolagem(){
+  if(abaAtual!=="resumo" || S.resumo.concluido) return;
+  var h = document.documentElement.scrollHeight - window.innerHeight;
+  var pct = h<=0 ? 100 : Math.round((window.scrollY / h) * 100);
+  if(pct > 100) pct = 100;
+  if(pct > S.resumo.rolagem){ S.resumo.rolagem = pct; salvar("resumo"); }
+  var p = document.getElementById("pctRol"); if(p) p.textContent = S.resumo.rolagem+"%";
+  var b = document.getElementById("btnLiResumo");
+  if(b && S.resumo.rolagem>=90){
+    b.disabled = false;
+    var a = document.getElementById("avisoRol");
+    if(a) a.innerHTML = "🎉 Você chegou ao fim! Pode clicar no botão.";
+  }
+  atualizarBarra();
+}
+window.addEventListener("scroll", function(){ checarRolagem(); });
+
+/* =====================================================================
+   5) SIMULADO
+   ===================================================================== */
+function renderSimulado(){
+  var wrap = document.getElementById("simWrap");
+  ultimoRenderTrancado.simulado = !destravada("simulado");
+  if(!destravada("simulado")){ wrap.innerHTML = htmlCadeado("simulado"); ligarVoltar(wrap); return; }
+  wrap.innerHTML = "<div class='barra-box'><div class='barra-fundo'><div class='barra-fill' id='simBarra'></div></div>"+
+                   "<div class='barra-txt'><span id='simTxt'></span></div></div>"+
+                   "<div id='simQs'></div>"+
+                   "<div class='pe-material' id='simPe'></div>"+
+                   "<div class='resultado' id='simRes'></div>";
+  var qs = document.getElementById("simQs");
+
+  SIM.forEach(function(q, i){
+    var certaTxt = q.a[q.c];
+    var ordem = embaralhar(q.a.map(function(t,k){return k;}), (i+1)*100 + 28);
+    q._ordem = ordem;
+    var d = document.createElement("div"); d.className = "sim-q"; d.id = "simq"+i;
+    d.innerHTML = "<span class='num-q'>Questão "+(i+1)+" de "+SIM.length+"</span>"+
+                  "<p class='enun'>"+q.q+"</p>";
+    var letras = "abcd";
+    ordem.forEach(function(oi, pos){
+      var bt = document.createElement("button");
+      bt.className = "sim-alt";
+      bt.innerHTML = "<b>"+letras[pos]+")</b> " + q.a[oi];
+      bt.dataset.orig = oi;
+      bt.onclick = function(){
+        if(S.simulado.enviado) return;
+        d.querySelectorAll(".sim-alt").forEach(function(x){ x.classList.remove("marcada"); });
+        bt.classList.add("marcada");
+        S.simulado.resp[i] = oi;
+        salvar("simulado"); atualizaSimBarra();
+      };
+      d.appendChild(bt);
+    });
+    var cm = document.createElement("div"); cm.className="sim-coment"; cm.id="coment"+i;
+    d.appendChild(cm);
+    qs.appendChild(d);
+    if(S.simulado.resp[i]!==undefined){
+      d.querySelectorAll(".sim-alt").forEach(function(x){
+        if(Number(x.dataset.orig)===S.simulado.resp[i]) x.classList.add("marcada");
+      });
+    }
+    void certaTxt;
+  });
+
+  var pe = document.getElementById("simPe");
+  var bt = document.createElement("button"); bt.className="btn-prox"; bt.id="btnEnviar";
+  bt.textContent = "🏁 Enviar minhas respostas";
+  bt.onclick = enviarSimulado;
+  pe.appendChild(bt);
+
+  if(S.simulado.enviado) mostrarGabarito();
+  atualizaSimBarra();
+}
+function atualizaSimBarra(){
+  var n = Object.keys(S.simulado.resp).length;
+  var el = document.getElementById("simBarra"); if(!el) return;
+  el.style.width = Math.round(n/SIM.length*100)+"%";
+  document.getElementById("simTxt").textContent = "Respondidas: "+n+" de "+SIM.length;
+  var b = document.getElementById("btnEnviar");
+  if(b && !S.simulado.enviado) b.disabled = (n < SIM.length);
+  if(b && !S.simulado.enviado && n<SIM.length) b.textContent = "🏁 Faltam "+(SIM.length-n)+" questão(ões)";
+  else if(b && !S.simulado.enviado) b.textContent = "🏁 Enviar minhas respostas";
+  atualizarBarra();
+}
+function enviarSimulado(){
+  var n = Object.keys(S.simulado.resp).length;
+  if(n < SIM.length) return;
+  modal("Enviar o simulado?",
+    "<p>Depois de enviar, o <b>gabarito comentado</b> aparece e você não pode mais trocar as respostas. Pode enviar?</p>",
+    [{txt:"Sim, enviar!", fn:confirmaEnvio},{txt:"Ainda não", cls:"cinza"}]);
+}
+function confirmaEnvio(){
+  var ac = 0;
+  SIM.forEach(function(q,i){ if(S.simulado.resp[i]===q.c) ac++; });
+  S.simulado.enviado = true; S.simulado.acertos = ac;
+  var letras = "ABCDEFGHJKLMNPQRSTUVWXYZ"; /* sem I e sem O */
+  var yy = letras[Math.floor(Math.random()*letras.length)] + letras[Math.floor(Math.random()*letras.length)];
+  S.simulado.codigo = "SIM-" + ("0"+ac).slice(-2) + "-" + yy;
+  salvar("simulado");
+  concluir("simulado");
+  mostrarGabarito();
+  window.scrollTo({top:0, behavior:"smooth"});
+}
+function mostrarGabarito(){
+  var letras = "abcd";
+  SIM.forEach(function(q,i){
+    var d = document.getElementById("simq"+i); if(!d) return;
+    var ordem = q._ordem || q.a.map(function(t,k){return k;});
+    d.querySelectorAll(".sim-alt").forEach(function(x, pos){
+      x.disabled = true;
+      var oi = Number(x.dataset.orig);
+      x.classList.remove("marcada");
+      if(oi===q.c) x.classList.add("gab-certa"); else x.classList.add("gab-errada");
+      if(oi===S.simulado.resp[i] && oi!==q.c) x.innerHTML = x.innerHTML + " &nbsp;← <b>você marcou</b>";
+      if(oi===q.c && oi===S.simulado.resp[i]) x.innerHTML = x.innerHTML + " &nbsp;✅ <b>você acertou!</b>";
+    });
+    var posCerta = ordem.indexOf(q.c);
+    var cm = document.getElementById("coment"+i);
+    var html = "<p class='ce'>✅ Resposta certa: letra "+letras[posCerta]+") "+q.a[q.c]+"</p><ul>";
+    ordem.forEach(function(oi,pos){
+      html += "<li><b>"+letras[pos]+")</b> "+(oi===q.c ? "<b>Certa.</b> " : "Errada. ")+q.fb[oi]+"</li>";
+    });
+    html += "</ul>";
+    cm.innerHTML = html; cm.className = "sim-coment ver";
+  });
+  var pe = document.getElementById("simPe"); if(pe) pe.innerHTML = "";
+  var r = document.getElementById("simRes");
+  var ac = S.simulado.acertos, pct = Math.round(ac/SIM.length*100);
+  var msg = pct>=90 ? "Uau! Você está pronto para a prova! 🪱🏆" :
+            pct>=70 ? "Muito bom! Dá uma revisada nas que erraram e você fica craque." :
+            pct>=50 ? "Bom começo! Volte ao Caderninho da Mina e releia as pegadinhas." :
+                      "Calma! Releia o Caderninho da Mina e as galerias — você consegue.";
+  r.className = "resultado ver";
+  r.innerHTML = "<div class='trofeu'>"+(pct>=70?"🏆":"🪱")+"</div>"+
+    "<h3 style='margin:6px 0'>Você acertou "+ac+" de "+SIM.length+" ("+pct+"%)</h3>"+
+    "<p>"+msg+"</p>"+
+    "<p style='font-size:.92rem;margin-top:16px'>Mostre este código para um adulto:</p>"+
+    "<div class='codigo'>"+S.simulado.codigo+"</div>"+
+    "<p style='font-size:.88rem;opacity:.8'>Com ele os pais abrem o <b>Relatório</b> lá embaixo. O gabarito comentado de cada questão já está acima. 👆</p>";
+}
+
+/* ---------- cadeado nos painéis ---------- */
+function htmlCadeado(id){
+  return "<div class='cadeado-aviso'><span class='big'>🔒</span>"+
+    "<h3>Esta etapa ainda está trancada</h3>"+
+    "<p>"+fraseCadeado(id)+"</p>"+
+    "<button class='btn-voltar' data-voltar='1'>⬅️ Voltar ao início</button></div>";
+}
+function ligarVoltar(wrap){
+  var b = wrap.querySelector("[data-voltar]");
+  if(b) b.onclick = function(){ irPara("leitura"); };
+}
+
+/* =====================================================================
+   SALVAMENTO / RELATÓRIO
+   ===================================================================== */
+function marcaSalvo(){
+  var el = document.getElementById("saveInfo");
+  if(el) el.textContent = "✅ Salvo automaticamente em "+fmtData(new Date().toISOString())+".";
+}
+function pacote(){
+  return {
+    kit:"Galerias da Minhoca — Ciências 3º ano (Un. 9 e 10)",
+    exportadoEm: agora(),
+    leitura:S.leitura, mapa:S.mapa, vf:S.vf, resumo:S.resumo, simulado:S.simulado, trilha:S.trilha
+  };
+}
+document.getElementById("btnExportar").onclick = function(){
+  var a = document.createElement("a");
+  a.href = "data:application/json;charset=utf-8,"+encodeURIComponent(JSON.stringify(pacote(),null,2));
+  a.download = "galerias-da-minhoca-progresso.json";
+  a.click();
+};
+document.getElementById("btnImportar").onclick = function(){ document.getElementById("fileImp").click(); };
+document.getElementById("fileImp").onchange = function(ev){
+  var f = ev.target.files[0]; if(!f) return;
+  var fr = new FileReader();
+  fr.onload = function(){
+    try{
+      var o = JSON.parse(fr.result);
+      ["leitura","mapa","vf","resumo","simulado","trilha"].forEach(function(k){
+        if(o[k]){ S[k] = o[k]; salvar(k); }
+      });
+      modal("📤 Progresso importado!","<p>Tudo certo! A página vai recarregar para mostrar o seu progresso.</p>",
+        [{txt:"Ok", fn:function(){ location.reload(); }}]);
+    }catch(e){
+      modal("Ops!","<p>Não consegui ler esse arquivo. Tente exportar de novo no outro aparelho.</p>",[{txt:"Fechar"}]);
+    }
+  };
+  fr.readAsText(f);
+};
+document.getElementById("btnZerar").onclick = function(){
+  modal("🗑️ Zerar tudo?",
+    "<p>Isso apaga <b>todo o progresso</b> deste kit neste aparelho: as galerias, o mapa, o jogo, o resumo e o simulado. A trilha volta a ficar trancada.</p><p>Tem certeza?</p>",
+    [{txt:"Sim, apagar tudo", fn:function(){ apagarTudo(); location.reload(); }},{txt:"Não, cancelar", cls:"cinza"}]);
+};
+
+document.getElementById("btnRel").onclick = function(){
+  var c = document.getElementById("inpCod").value.trim().toUpperCase();
+  var ok = (c==="PAIS-77") || (S.simulado.codigo && c===S.simulado.codigo);
+  if(!ok){
+    modal("Código não confere","<p>Digite o código que apareceu no fim do Simulado (<b>SIM-…</b>) ou o código da família.</p>",[{txt:"Fechar"}]);
+    return;
+  }
+  mostrarRelatorio(c==="PAIS-77");
+};
+function mostrarRelatorio(ehPais){
+  var r = document.getElementById("relatorio");
+  var certasL = 0, totalL = 0;
+  LEITURA.forEach(function(g,i){
+    var b = S.leitura.blocos[i];
+    g.qs.forEach(function(_,qi){
+      totalL++;
+      if(b && b.primeira && b.primeira[qi]) certasL++;
+    });
+  });
+  var lacPrim = 0;
+  for(var k in S.mapa.lac){ if(S.mapa.lac[k] && S.mapa.lac[k].primeira) lacPrim++; }
+
+  var h = "<h4 style='margin:0 0 10px;color:#6B4226'>📊 Como foi o estudo</h4><table>";
+  h += "<tr><th>Material</th><th>Resultado</th></tr>";
+  h += "<tr><td>📖 Leitura Guiada</td><td>"+galeriasFeitas()+" de "+TOTAL_GAL+" galerias concluídas · <b>"+certasL+" de "+totalL+"</b> perguntas certas de primeira</td></tr>";
+  h += "<tr><td>🧠 Mapa das Galerias</td><td>"+lacunasFeitas()+" de "+TOTAL_LAC+" peças encaixadas · <b>Mapa Mental: "+lacPrim+" de "+TOTAL_LAC+" peças encaixadas de primeira</b></td></tr>";
+  h += "<tr><td>✅ Verdade na Terra?</td><td>"+(S.vf.rodadas? ("melhor placar <b>"+S.vf.melhor+" de 12</b> · "+S.vf.rodadas+" rodada(s)") : "ainda não jogou")+"</td></tr>";
+  h += "<tr><td>🗺️ Caderninho (Resumo)</td><td>leu <b>"+S.resumo.rolagem+"%</b> da página"+(S.resumo.concluido?" · confirmou que leu até o fim":"")+"</td></tr>";
+  h += "<tr><td>📝 A Grande Escavação</td><td>"+(S.simulado.enviado ? ("<b>"+S.simulado.acertos+" de "+SIM.length+"</b> ("+Math.round(S.simulado.acertos/SIM.length*100)+"%) · código "+S.simulado.codigo) : "ainda não enviou")+"</td></tr>";
+  h += "</table>";
+
+  h += "<h4 style='margin:18px 0 8px;color:#6B4226'>🛤️ Trilha — a ordem que a criança seguiu</h4><table>";
+  h += "<tr><th>Etapa</th><th>Situação</th></tr>";
+  ETAPAS.forEach(function(e){
+    h += "<tr><td>"+e.icone+" "+e.nome+"</td><td>"+
+         (S[e.id].concluido ? "✅ concluída em "+fmtData(S[e.id].concluidoEm) : "⬜ ainda não concluída")+"</td></tr>";
+  });
+  h += "</table>";
+  if(S.trilha.liberadoPelosPais){
+    h += "<p class='selo-lib'>🔓 Trilha liberada pelos pais em "+fmtData(S.trilha.liberadoEm)+"</p>";
+  }
+
+  /* questões erradas do simulado */
+  if(S.simulado.enviado){
+    var erradas = [];
+    SIM.forEach(function(q,i){ if(S.simulado.resp[i]!==q.c) erradas.push(i+1); });
+    h += "<h4 style='margin:18px 0 8px;color:#6B4226'>🔁 Para revisar</h4>";
+    h += erradas.length ? "<p>Questões erradas no simulado: <b>"+erradas.join(", ")+"</b>. O gabarito comentado explica cada uma.</p>"
+                        : "<p>🎉 Acertou todas as questões do simulado!</p>";
+  }
+
+  r.innerHTML = h;
+
+  if(ehPais){
+    var cx = document.createElement("div");
+    cx.style.marginTop = "14px";
+    if(!S.trilha.liberadoPelosPais){
+      var b = document.createElement("button");
+      b.className = "b-exp"; b.style.cssText="border:none;border-radius:11px;padding:10px 15px;font-family:inherit;font-weight:bold;cursor:pointer;color:#fff;background:#2F80C2";
+      b.textContent = "🔓 Liberar todos os materiais";
+      b.onclick = function(){
+        modal("🔓 Liberar a trilha inteira?",
+          "<p>Todos os materiais ficam abertos, mesmo os que a criança ainda não concluiu.</p>"+
+          "<p>Use quando ela estudou de outro jeito (no caderno, com você) ou trocou de aparelho e o progresso não veio junto.</p>",
+          [{txt:"Sim, liberar", fn:function(){
+              S.trilha.liberadoPelosPais = true; S.trilha.liberadoEm = agora();
+              salvar("trilha"); montarAbas(); renderTudo(); mostrarRelatorio(true);
+           }},{txt:"Cancelar", cls:"cinza"}]);
+      };
+      cx.appendChild(b);
+    }else{
+      var b2 = document.createElement("button");
+      b2.style.cssText="border:none;border-radius:11px;padding:10px 15px;font-family:inherit;font-weight:bold;cursor:pointer;color:#fff;background:#E2483D";
+      b2.textContent = "🔒 Trancar de novo";
+      b2.onclick = function(){
+        S.trilha.liberadoPelosPais = false; S.trilha.liberadoEm = null;
+        salvar("trilha"); montarAbas(); renderTudo(); mostrarRelatorio(true);
+      };
+      cx.appendChild(b2);
+    }
+    r.appendChild(cx);
+  }
+  r.className = "ver";
+}
+
+/* =====================================================================
+   INICIALIZAÇÃO
+   ===================================================================== */
+function renderTudo(){
+  renderLeitura(); renderMapa(); renderVF(); renderResumo(); renderSimulado();
+}
+carregar();
+ETAPAS.forEach(function(e){ destravadasAntes[e.id] = destravada(e.id); });
+montarAbas();
+renderTudo();
+irPara(
+  !S.leitura.concluido ? "leitura" :
+  !S.mapa.concluido ? "mapa" :
+  !S.vf.concluido ? "vf" :
+  !S.resumo.concluido ? "resumo" : "simulado"
+);
+if(ler(K.leitura)) marcaSalvo();
+
+})();
+
+</script>
+</body>
+</html>
